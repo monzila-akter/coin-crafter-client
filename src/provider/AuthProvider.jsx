@@ -1,8 +1,8 @@
-import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, updateProfile } from "firebase/auth";
-import { createContext, useState } from "react";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, updateProfile } from "firebase/auth";
+import { createContext, useEffect, useState } from "react";
 import { auth } from "../firebase_config";
 
-const AuthContext = createContext(null);
+export const AuthContext = createContext(null);
 
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState('');
@@ -47,7 +47,7 @@ const AuthProvider = ({children}) => {
             return unsubscribe();
         }
 
-    }, [axiosSecurePublic])
+    }, [])
     
  
     const authInfo = {
@@ -60,7 +60,7 @@ const AuthProvider = ({children}) => {
        updateUserProfile
     }
 
-    return <AuthContext.Provider value={authInfo}></AuthContext.Provider>
+    return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
 };
 
 export default AuthProvider;
