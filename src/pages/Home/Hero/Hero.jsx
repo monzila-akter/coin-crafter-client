@@ -11,7 +11,7 @@ const Hero = () => {
   };
 
   return (
-    <div className="hero-section bg-indigo-500 text-white">
+    <div className="hero-section mb-10 md:mb-24">
       <div className="">
         <Carousel
           showThumbs={false}
