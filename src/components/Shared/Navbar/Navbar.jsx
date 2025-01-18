@@ -1,17 +1,17 @@
 import React, { useState, useContext } from "react";
-import { NavLink, Link } from "react-router-dom";
-import { FaUserCircle } from "react-icons/fa";
-import { BsGithub } from "react-icons/bs";
+import { NavLink, Link, useLocation } from "react-router-dom";
+import { FaBell, FaUserCircle, FaUserTie } from "react-icons/fa";
+import { BsBell, BsGithub } from "react-icons/bs";
 import coinIcon from "/image/icons8-coin-48.png";
 import { AuthContext } from "../../../provider/AuthProvider";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 
-
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { user, logOut } = useContext(AuthContext); // Access logged-in user info
+  const { user, logOut } = useContext(AuthContext);
   const axiosSecurePublic = useAxiosPublic();
+  const location = useLocation();
 
   // Fetch user data from the backend using TanStack Query
   const { data: userInfo = {}, refetch } = useQuery({
@@ -23,6 +23,9 @@ const Navbar = () => {
     },
     enabled: !!user?.email, // Run query only when user is logged in
   });
+
+  // Determine if the current route is the dashboard route
+  const isDashboard = location.pathname.startsWith("/dashboard");
 
   return (
     <nav className="bg-indigo-500 text-white">
@@ -37,57 +40,109 @@ const Navbar = () => {
           </NavLink>
         </div>
 
-        {/* Center Section - Navigation Routes */}
-        <div className="hidden lg:flex items-center space-x-6 justify-center flex-grow">
-          <NavLink
-            to="/dashboard"
-            className="text-lg font-medium text-white hover:text-white"
-          >
-            Dashboard
-          </NavLink>
-          <div className="text-lg font-medium btn bg-white border-none flex items-center">
-            <img className="w-8" src={coinIcon} alt="Coin Icon" />
-            <span className="text-2xl font-semibold">
-              {userInfo?.coins || 0} {/* Display coins from the fetched user data */}
-            </span>
+        {/* Center Section - Dashboard Navbar */}
+        {isDashboard ? (
+          <div className="hidden lg:flex items-center space-x-6 justify-center flex-grow">
+            {/* Available Coins */}
+            <div className="text-lg font-medium btn bg-white border-none flex items-center">
+              <img className="w-8" src={coinIcon} alt="Coin Icon" />
+              <span className="text-2xl font-semibold">
+                {userInfo?.coins || 0}
+              </span>
+            </div>
+            {/* User Role */}
+            <div className="text-lg font-semibold text-white btn bg-yellow-500 border-none ">
+              <FaUserTie />
+              <span className="font-semibold">{userInfo?.newRole || "User"}</span>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="hidden lg:flex items-center space-x-6 justify-center flex-grow">
+            <NavLink
+              to="/dashboard"
+              className="text-lg font-medium text-white hover:text-white"
+            >
+              Dashboard
+            </NavLink>
+            {/* Available Coins */}
+            <div className="text-lg font-medium btn bg-white border-none flex items-center">
+              <img className="w-8" src={coinIcon} alt="Coin Icon" />
+              <span className="text-2xl font-semibold">
+                {userInfo?.coins || 0}
+              </span>
+            </div>
+          </div>
+        )}
 
-        {/* Right Section - Profile, Login, Register, Join as Developer */}
+        {/* Right Section - Profile and Notification */}
         <div className="hidden lg:flex items-center space-x-4">
-          <div>
-           
-             {
-              user ? <img title={user?.displayName} className="w-10 h-10 border-2 border-yellow-400 rounded-full" src={user?.photoURL}></img> :  <FaUserCircle className="text-4xl text-white" />
-             }
-           
-          </div>
-
-            {
-              user ? <button onClick={logOut} className="text-lg font-medium btn bg-transparent border-white text-white border-2 hover:bg-transparent hover:border-yellow-400 hover:text-yellow-400">Logout</button> : <>  <Link
-              to="/login"
-              className="text-lg font-medium btn bg-transparent border-white text-white border-2 hover:bg-transparent hover:border-yellow-400 hover:text-yellow-400"
-            >
-              Login
-            </Link>
-            <Link
-              to="/register"
-              className="text-lg font-medium btn bg-transparent border-white text-white border-2 hover:bg-transparent hover:border-yellow-400 hover:text-yellow-400"
-            >
-              Register
-            </Link></>
-            }
-
-          {/* Join as Developer Button */}
-          <a
-            href="https://github.com/monzila-akter"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center bg-yellow-500 hover:bg-gray-800 text-white btn border-none text-lg rounded transition"
-          >
-            <BsGithub className="mr-2" />
-            Join as Developer
-          </a>
+          {isDashboard ? (
+            <>
+              {/* Notification Icon */}
+              <FaBell className="text-2xl text-white cursor-pointer" />
+              {/* User Profile */}
+              <div>
+                {user ? (
+                  <img
+                    title={user?.displayName}
+                    className="w-10 h-10 border-2 border-yellow-400 rounded-full"
+                    src={user?.photoURL}
+                    alt="User"
+                  />
+                ) : (
+                  <FaUserCircle className="text-4xl text-white" />
+                )}
+              </div>
+            </>
+          ) : (
+            <>
+            <div>
+                {user ? (
+                  <img
+                    title={user?.displayName}
+                    className="w-10 h-10 border-2 border-yellow-400 rounded-full"
+                    src={user?.photoURL}
+                    alt="User"
+                  />
+                ) : (
+                  <FaUserCircle className="text-4xl text-white" />
+                )}
+              </div>
+              {user ? (
+                <button
+                  onClick={logOut}
+                  className="text-lg font-medium btn bg-transparent border-white text-white border-2 hover:bg-transparent hover:border-yellow-400 hover:text-yellow-400"
+                >
+                  Logout
+                </button>
+              ) : (
+                <>
+                  <Link
+                    to="/login"
+                    className="text-lg font-medium btn bg-transparent border-white text-white border-2 hover:bg-transparent hover:border-yellow-400 hover:text-yellow-400"
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    to="/register"
+                    className="text-lg font-medium btn bg-transparent border-white text-white border-2 hover:bg-transparent hover:border-yellow-400 hover:text-yellow-400"
+                  >
+                    Register
+                  </Link>
+                </>
+              )}
+              {/* Join as Developer Button */}
+              <a
+                href="https://github.com/monzila-akter"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center bg-yellow-500 hover:bg-gray-800 text-white btn border-none text-lg rounded transition"
+              >
+                <BsGithub className="mr-2" />
+                Join as Developer
+              </a>
+            </>
+          )}
         </div>
 
         {/* Mobile Menu Button */}
@@ -120,49 +175,94 @@ const Navbar = () => {
           menuOpen ? "block" : "hidden"
         } lg:hidden bg-indigo-500 text-white space-y-2 p-4`}
       >
-        <NavLink
-          to="/dashboard"
-          className="block text-lg font-medium text-white hover:text-white"
-        >
-          Dashboard
+        {isDashboard ? (
+          <>
+            <div className="block text-lg flex space-x-2 items-center bg-white py-2 px-3 w-24 rounded-lg text-black font-medium">
+              <img className="w-8" src={coinIcon} alt="Coin Icon" />
+              <span className="text-2xl font-semibold">
+                {userInfo?.coins || 0}
+              </span>
+            </div>
+            <div className="block text-xl font-medium">
+               <span className="font-semibold btn bg-yellow-500 border-none text-white text-xl"><FaUserTie></FaUserTie> {userInfo?.newRole || "User"}</span>
+            </div>
+            {/* Notification Icon for Mobile */}
+            <FaBell className="text-2xl text-white cursor-pointer" />
+            <NavLink className="block flex items-center space-x-2 text-lg text-white hover:text-white">
+          {user ? (
+            <img
+              title={user?.displayName}
+              className="w-10 h-10 border-2 border-yellow-400 rounded-full"
+              src={user?.photoURL}
+              alt="User"
+            />
+          ) : (
+            <FaUserCircle className="text-4xl text-white" />
+          )}
         </NavLink>
-        <div className="block text-lg flex space-x-2 items-center bg-white py-2 px-3 w-24 rounded-lg text-black font-medium">
-          <img className="w-8" src={coinIcon} alt="Coin Icon" />
-          <span className="text-2xl font-semibold">
-            {userInfo?.coins || 0} {/* Coins for mobile view */}
-          </span>
-        </div>
-        <NavLink
-          className="block flex items-center space-x-2 text-lg text-white hover:text-white"
-        >
-          {
-              user ? <img title={user?.displayName} className="w-10 h-10 border-2 border-yellow-400 rounded-full" src={user?.photoURL}></img> :  <FaUserCircle className="text-4xl text-white" />
-             }
+          </>
+        ) : (
+          <>
+            <NavLink
+              to="/dashboard"
+              className="block text-lg font-medium text-white hover:text-white"
+            >
+              Dashboard
+            </NavLink>
+            <div className="block text-lg flex space-x-2 items-center bg-white py-2 px-3 w-24 rounded-lg text-black font-medium">
+              <img className="w-8" src={coinIcon} alt="Coin Icon" />
+              <span className="text-2xl font-semibold">
+                {userInfo?.coins || 0}
+              </span>
+            </div>
+            <NavLink className="block flex items-center space-x-2 text-lg text-white hover:text-white">
+          {user ? (
+            <img
+              title={user?.displayName}
+              className="w-10 h-10 border-2 border-yellow-400 rounded-full"
+              src={user?.photoURL}
+              alt="User"
+            />
+          ) : (
+            <FaUserCircle className="text-4xl text-white" />
+          )}
         </NavLink>
-
-            {
-              user ? <button onClick={logOut} className="text-lg font-medium btn bg-transparent border-white text-white border-2 hover:bg-transparent hover:border-yellow-400 hover:text-yellow-400">Logout</button> : <><Link
-              to="/login"
-              className="text-lg mr-3 font-medium btn bg-transparent border-white text-white border-2 hover:bg-transparent hover:border-yellow-400 hover:text-yellow-400"
-            >
-              Login
-            </Link>
-            <Link
-              to="/register"
-              className="text-lg font-medium btn bg-transparent border-white text-white border-2 hover:bg-transparent hover:border-yellow-400 hover:text-yellow-400"
-            >
-              Register
-            </Link></>
-            }
-        <a
-          href="https://github.com/your-repository"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center bg-yellow-500 hover:bg-gray-800 text-white btn text-lg rounded border-none"
-        >
-          <BsGithub className="mr-2" />
-          Join as Developer
-        </a>
+            {user ? (
+                <button
+                  onClick={logOut}
+                  className="text-lg font-medium btn bg-transparent border-white text-white border-2 hover:bg-transparent hover:border-yellow-400 hover:text-yellow-400"
+                >
+                  Logout
+                </button>
+              ) : (
+                <>
+                  <Link
+                    to="/login"
+                    className="text-lg font-medium btn bg-transparent border-white text-white border-2 hover:bg-transparent hover:border-yellow-400 hover:text-yellow-400"
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    to="/register"
+                    className="ml-4 text-lg font-medium btn bg-transparent border-white text-white border-2 hover:bg-transparent hover:border-yellow-400 hover:text-yellow-400"
+                  >
+                    Register
+                  </Link>
+                </>
+              )}
+              {/* Join as Developer Button */}
+              <a
+                href="https://github.com/monzila-akter"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center bg-yellow-500 hover:bg-gray-800 text-white btn border-none text-lg rounded transition"
+              >
+                <BsGithub className="mr-2" />
+                Join as Developer
+              </a>
+          </>
+        )}
+        
       </div>
     </nav>
   );
