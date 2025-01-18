@@ -56,11 +56,11 @@ const Navbar = () => {
         {/* Right Section - Profile, Login, Register, Join as Developer */}
         <div className="hidden lg:flex items-center space-x-4">
           <div>
-            {user ? (
-              <FaUserCircle className="text-4xl text-white" />
-            ) : (
-              <FaUserCircle className="text-4xl text-gray-400" />
-            )}
+           
+             {
+              user ? <img title={user?.displayName} className="w-10 h-10 border-2 border-yellow-400 rounded-full" src={user?.photoURL}></img> :  <FaUserCircle className="text-4xl text-white" />
+             }
+           
           </div>
 
             {
@@ -135,10 +135,13 @@ const Navbar = () => {
         <NavLink
           className="block flex items-center space-x-2 text-lg text-white hover:text-white"
         >
-          <FaUserCircle className="text-4xl" />
+          {
+              user ? <img title={user?.displayName} className="w-10 h-10 border-2 border-yellow-400 rounded-full" src={user?.photoURL}></img> :  <FaUserCircle className="text-4xl text-white" />
+             }
         </NavLink>
 
-            <Link
+            {
+              user ? <button onClick={logOut} className="text-lg font-medium btn bg-transparent border-white text-white border-2 hover:bg-transparent hover:border-yellow-400 hover:text-yellow-400">Logout</button> : <><Link
               to="/login"
               className="text-lg mr-3 font-medium btn bg-transparent border-white text-white border-2 hover:bg-transparent hover:border-yellow-400 hover:text-yellow-400"
             >
@@ -149,7 +152,8 @@ const Navbar = () => {
               className="text-lg font-medium btn bg-transparent border-white text-white border-2 hover:bg-transparent hover:border-yellow-400 hover:text-yellow-400"
             >
               Register
-            </Link>
+            </Link></>
+            }
         <a
           href="https://github.com/your-repository"
           target="_blank"

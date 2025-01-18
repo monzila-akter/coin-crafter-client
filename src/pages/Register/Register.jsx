@@ -79,8 +79,13 @@ const Register = () => {
                                 <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
-                                <input type="email" placeholder="Email" {...register("email", { required: true })} name="email" className="input input-bordered" />
-                                {errors.email && <span className="text-sm text-red-600">Email is required</span>}
+                                <input type="email" placeholder="Email" {...register("email", { required: true, pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/  })} name="email" className="input input-bordered" />
+                                {errors.email?.type === "required" && (
+                                    <p className="text-sm text-red-600">Email is required</p>
+                                )}
+                                {errors.email?.type === "pattern" && (
+                                    <p className="text-sm text-red-600">Enter a valid email address</p>
+                                )}
                             </div>
 
                             {/* Password field */}
@@ -88,12 +93,12 @@ const Register = () => {
                                 <label className="label">
                                     <span className="label-text">Password</span>
                                 </label>
-                                <input type="password" placeholder="Enter Your Password" name="password" {...register("password", { required: true, minLength: 6, maxLength: 20, pattern: /(?=(.*[a-z]){1,})(?=(.*[A-Z]){1,})(?=(.*[0-9]){1,})(?=(.*[!@#$%^&*()\-__+.]){1,})/ })} className="input input-bordered" />
+                                <input type="password" placeholder="Enter Your Password" name="password" {...register("password", { required: true, minLength: 8, maxLength: 20, pattern: /(?=(.*[a-z]){1,})(?=(.*[A-Z]){1,})(?=(.*[0-9]){1,})(?=(.*[!@#$%^&*()\-__+.]){1,})/ })} className="input input-bordered" />
                                 {errors.password?.type === "required" && (
                                     <p className="text-sm text-red-600">Password is required</p>
                                 )}
                                 {errors.password?.type === "minLength" && (
-                                    <p className="text-sm text-red-600">Password must have at least 6 characters</p>
+                                    <p className="text-sm text-red-600">Password must have at least 8 characters</p>
                                 )}
                                 {errors.password?.type === "pattern" && (
                                     <p className="text-sm text-red-600">Password must have one lowercase, one uppercase, one number, and one special character.</p>

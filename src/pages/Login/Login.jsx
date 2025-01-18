@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import { AuthContext } from '../../provider/AuthProvider';
 import Swal from 'sweetalert2';
+import toast from 'react-hot-toast';
 
 const Login = () => {
         const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -27,8 +28,9 @@ const Login = () => {
         
        })
        .catch(error => {
-        console.log(error.message)
-       })
+        // Show toast for incorrect email or password
+          toast.error(error.message)
+    });
     }
 
 
