@@ -6,6 +6,7 @@ import Register from '../pages/Register/Register';
 import Login from '../pages/Login/Login';
 import Dashboard from '../layouts/Dashboard/Dashboard';
 import WorkerHome from '../layouts/Dashboard/WorkerPanel/WorkerHome/WorkerHome';
+import ManageUsers from '../layouts/Dashboard/ManageUsers/ManageUsers';
 
 const router = createBrowserRouter([
     {
@@ -34,6 +35,11 @@ const router = createBrowserRouter([
             {
               path: "workerHome",
               element: <WorkerHome></WorkerHome>
+            },
+            // admin panel
+            {
+              path: "manageUsers",
+              element: <ManageUsers></ManageUsers>
             }
       ]
     }
