@@ -26,7 +26,7 @@ const Hero = () => {
             <img
               src="https://i.ibb.co.com/YLpRwV7/1675240007668.jpg"
               alt="Empower Your Development"
-              className="w-full h-96 md:h-[500px] object-cover rounded-lg"
+              className="w-full h-96 md:h-[500px] object-cover "
             />
             <motion.div
               className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-center"
@@ -46,7 +46,7 @@ const Hero = () => {
             <img
               src="https://i.ibb.co.com/p4QF6yC/istockphoto-1053065032-612x612.jpg"
               alt="Unlock New Opportunities"
-              className="w-full h-96 md:h-[500px] object-cover rounded-lg"
+              className="w-full h-96 md:h-[500px] object-cover"
             />
             <motion.div
               className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-center"
@@ -64,9 +64,9 @@ const Hero = () => {
           {/* Slide 3 */}
           <div className="relative">
             <img
-              src="https://i.ibb.co.com/7GS9cBP/images-28.jpg"
+              src="https://i.ibb.co.com/fN7yydb/2205-w037-n003-394b-p1-394-scaled.jpg"
               alt="Join Our Developer Community"
-              className="w-full h-96 md:h-[500px] object-cover rounded-lg"
+              className="w-full h-96 md:h-[500px] object-cover"
             />
             <motion.div
               className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-center"

@@ -38,58 +38,14 @@ const Register = () => {
                                     reset();
                                     navigate("/");
                                 }
+                            }).catch((error) => {
+                              console.log('error register', error)
                             });
                     });
             });
     };
 
-    const handleGoogleLogin = () => {
-        googleSignIn()
-            .then(result => {
-                console.log(result.user);
-                const userInfo = {
-                    email: result.user?.email,
-                    name: result.user?.displayName,
-                    photo: result.user?.photoURL,
-                    role: "Buyer", // Default role for Google users
-                };
-
-                // No need to send coins, the backend will handle coin assignment based on the role
-                axiosSecurePublic.post("/register", userInfo)
-                    .then(res => {
-                        console.log(res.data);
-                        if (res.data.insertedId) {
-                            Swal.fire({
-                                title: "Successfully Sign Up!",
-                                icon: "success",
-                                draggable: true,
-                            });
-                        }
-                        navigate("/");
-                    })
-                    .catch(err => {
-                        // Handle error if the user already exists
-                        if (err.response && err.response.status === 400) {
-                            Swal.fire({
-                                title: "User already exists",
-                                text: "This email is already registered.",
-                                icon: "error",
-                                draggable: true,
-                            });
-                        } else {
-                            Swal.fire({
-                                title: "Error",
-                                text: "An unexpected error occurred. Please try again.",
-                                icon: "error",
-                                draggable: true,
-                            });
-                        }
-                    });
-            })
-            .catch(error => {
-                console.error("Google sign-in error:", error);
-            });
-    };
+   
 
     return (
         <>
@@ -165,11 +121,6 @@ const Register = () => {
                         </form>
 
                         <p className='text-xl font-medium text-center text-[#444444]mb-4'>Or sign Up with</p>
-                        <div className='flex space-x-14 items-center justify-center mt-4'>
-                            <button onClick={handleGoogleLogin} className='btn bg-indigo-400 text-white text-lg font-semibold w-full'>
-                                <FaGoogle /> Google
-                            </button>
-                        </div>
                     </div>
                 </div>
             </div>
