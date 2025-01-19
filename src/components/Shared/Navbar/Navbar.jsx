@@ -85,7 +85,7 @@ const Navbar = () => {
                 {user ? (
                   <img
                     title={user?.displayName}
-                    className="w-10 h-10 border-2 border-yellow-400 rounded-full"
+                    className="w-10 object-cover h-10 border-2 border-yellow-400 rounded-full"
                     src={user?.photoURL}
                     alt="User"
                   />
@@ -100,7 +100,7 @@ const Navbar = () => {
                 {user ? (
                   <img
                     title={user?.displayName}
-                    className="w-10 h-10 border-2 border-yellow-400 rounded-full"
+                    className="w-10 h-10 object-cover border-2 border-yellow-400 rounded-full"
                     src={user?.photoURL}
                     alt="User"
                   />
@@ -192,7 +192,7 @@ const Navbar = () => {
           {user ? (
             <img
               title={user?.displayName}
-              className="w-10 h-10 border-2 border-yellow-400 rounded-full"
+              className="w-10 h-10 object-cover border-2 border-yellow-400 rounded-full"
               src={user?.photoURL}
               alt="User"
             />
@@ -219,7 +219,7 @@ const Navbar = () => {
           {user ? (
             <img
               title={user?.displayName}
-              className="w-10 h-10 border-2 border-yellow-400 rounded-full"
+              className="w-10 h-10 object-cover border-2 border-yellow-400 rounded-full"
               src={user?.photoURL}
               alt="User"
             />
