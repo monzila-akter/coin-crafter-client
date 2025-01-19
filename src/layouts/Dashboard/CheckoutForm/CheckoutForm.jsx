@@ -1,100 +1,140 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import { useQuery } from '@tanstack/react-query';
 
-const CheckoutForm = ({ coins, price }) => {
-  const [error, setError] = useState('');
-  const stripe = useStripe();
-  const elements = useElements();
-  const navigate = useNavigate();
+const CheckoutForm = ({ price, email, coins }) => {
+    const [error, setError] = useState('');
+    const [processing, setProcessing] = useState(false);
+    const stripe = useStripe();
+    const elements = useElements();
+    const navigate = useNavigate();
+    const axiosSecure = useAxiosSecure(); // Secure Axios instance
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    if (!stripe || !elements) {
-      return;
-    }
-
-    const card = elements.getElement(CardElement);
-    if (card == null) {
-      return;
-    }
-
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: 'card',
-      card,
+    // Fetch user info and refetch function directly in CheckoutForm
+    const { data: userInfo = {}, refetch } = useQuery({
+        queryKey: ['userInfo', email],  // Query user info based on email
+        queryFn: async () => {
+            if (!email) return {};
+            const response = await axiosSecure.get(`/user/${email}`);
+            return response.data;
+        },
+        enabled: !!email, // Only run query if email is available
     });
 
-    if (error) {
-      console.log('payment error', error);
-      setError(error.message);
-    } else {
-      console.log('payment method', paymentMethod);
-      setError('');
+    const handleSubmit = async (event) => {
+        event.preventDefault();
 
-      // Now call the backend to create a payment intent and update user's coins
-      try {
-        const response = await axios.post(
-          'http://localhost:5000/create-payment-intent',
-          { price }
-        );
-        const clientSecret = response.data.clientSecret;
-
-        // Confirm the payment
-        const { error: stripeError, paymentIntent } =
-          await stripe.confirmCardPayment(clientSecret, {
-            payment_method: paymentMethod.id,
-          });
-
-        if (stripeError) {
-          console.log('Payment failed:', stripeError);
-          setError(stripeError.message);
-        } else {
-          // Update the user’s coin balance after successful payment
-          await axios.patch('http://localhost:5000/user/coins', {
-            email: localStorage.getItem('email'), // Assume email is stored in localStorage
-            coins: coins,
-          });
-
-          // Navigate to dashboard or coins section after successful payment
-          navigate('/dashboard');
+        if (!stripe || !elements) {
+            return;
         }
-      } catch (error) {
-        console.error('Payment processing failed:', error);
-        setError('Payment processing failed. Please try again.');
-      }
-    }
-  };
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <CardElement
-        options={{
-          style: {
-            base: {
-              fontSize: '16px',
-              color: '#424770',
-              '::placeholder': {
-                color: '#aab7c4',
-              },
-            },
-            invalid: {
-              color: '#9e2146',
-            },
-          },
-        }}
-      />
-      <button
-        className="btn bg-indigo-500 block mx-auto text-xl font-semibold text-white my-10"
-        type="submit"
-        disabled={!stripe}
-      >
-        Pay ${price}
-      </button>
-      <p className="text-sm font-medium text-red-500">{error}</p>
-    </form>
-  );
+        const card = elements.getElement(CardElement);
+        if (card == null) {
+            return;
+        }
+
+        setProcessing(true);
+
+        try {
+            // Fetch client secret from the backend using axiosSecure
+            const { data } = await axiosSecure.post('/create-payment-intent', {
+                price,
+                email,
+                coins,
+            });
+
+            const clientSecret = data.clientSecret;
+
+            // Confirm the payment
+            const { paymentIntent, error: stripeError } = await stripe.confirmCardPayment(clientSecret, {
+                payment_method: {
+                    card: card,
+                    billing_details: {
+                        email,
+                    },
+                },
+            });
+
+            if (stripeError) {
+                console.error('Payment error:', stripeError);
+                setError(stripeError.message);
+                setProcessing(false);
+                return;
+            }
+
+            if (paymentIntent.status === 'succeeded') {
+
+        //    prepare payment data for backend
+        const paymentData = {
+            email,
+            amount: price * 100,
+            coins,
+            transactionId: paymentIntent.id,
+            paymentStatus: paymentIntent.status,
+            date: new Date(),
+        }
+
+        await axiosSecure.post("/payments", paymentData)
+
+                // Display a SweetAlert success message
+                Swal.fire({
+                    title: 'Payment Successful!',
+                    text: `You have successfully purchased ${coins} coins.`,
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                });
+
+                // Call refetch to refresh the user's coins after the successful payment
+                refetch();
+
+                navigate('/dashboard/paymentHistory'); // Navigate to dashboard after successful payment
+            } else {
+                Swal.fire({
+                    title: 'Payment Failed',
+                    text: 'Please try again later.',
+                    icon: 'error',
+                    confirmButtonText: 'OK',
+                });
+            }
+        } catch (error) {
+            console.error('Error processing payment:', error);
+            setError('Failed to process payment. Please try again.');
+        }
+
+        setProcessing(false);
+    };
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <CardElement
+                options={{
+                    style: {
+                        base: {
+                            fontSize: '16px',
+                            color: '#424770',
+                            '::placeholder': {
+                                color: '#aab7c4',
+                            },
+                        },
+                        invalid: {
+                            color: '#9e2146',
+                        },
+                    },
+                }}
+            />
+            <button
+                className='btn bg-indigo-500 block mx-auto text-xl font-semibold text-white my-10'
+                type="submit"
+                disabled={!stripe || processing}
+            >
+                {processing ? 'Processing...' : 'Pay'}
+            </button>
+            {error && <p className='text-sm font-medium text-red-500'>{error}</p>}
+        </form>
+    );
 };
 
 export default CheckoutForm;

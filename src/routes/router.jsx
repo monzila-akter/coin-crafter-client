@@ -10,6 +10,7 @@ import ManageUsers from '../layouts/Dashboard/ManageUsers/ManageUsers';
 import PrivateRoute from './PrivateRoute';
 import PurchaseCoin from '../layouts/Dashboard/PurchaseCoin/PurchaseCoin';
 import Payment from '../layouts/Dashboard/Payment/Payment';
+import PaymentHistory from '../layouts/Dashboard/PaymentHistory/PaymentHistory';
 
 const router = createBrowserRouter([
     {
@@ -51,8 +52,12 @@ const router = createBrowserRouter([
               element: <PurchaseCoin></PurchaseCoin>
             },
             {
-              path: "payment",
+              path: "payment/:coins",
               element: <Payment></Payment>
+            },
+            {
+              path: "paymentHistory",
+              element: <PaymentHistory></PaymentHistory>
             }
       ]
     }
