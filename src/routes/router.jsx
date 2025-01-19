@@ -7,6 +7,9 @@ import Login from '../pages/Login/Login';
 import Dashboard from '../layouts/Dashboard/Dashboard';
 import WorkerHome from '../layouts/Dashboard/WorkerPanel/WorkerHome/WorkerHome';
 import ManageUsers from '../layouts/Dashboard/ManageUsers/ManageUsers';
+import PrivateRoute from './PrivateRoute';
+import PurchaseCoin from '../layouts/Dashboard/PurchaseCoin/PurchaseCoin';
+import Payment from '../layouts/Dashboard/Payment/Payment';
 
 const router = createBrowserRouter([
     {
@@ -30,7 +33,7 @@ const router = createBrowserRouter([
     // dashboard here
     {
       path: "/dashboard",
-      element: <Dashboard></Dashboard>,
+      element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
       children: [
             {
               path: "workerHome",
@@ -40,6 +43,16 @@ const router = createBrowserRouter([
             {
               path: "manageUsers",
               element: <ManageUsers></ManageUsers>
+            },
+            // buyer routes
+
+            {
+              path: "purchaseCoin",
+              element: <PurchaseCoin></PurchaseCoin>
+            },
+            {
+              path: "payment",
+              element: <Payment></Payment>
             }
       ]
     }

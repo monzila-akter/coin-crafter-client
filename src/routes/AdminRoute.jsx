@@ -1,17 +1,20 @@
-import React, { useContext } from 'react';
 
+import { useContext } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
+
+import useUserRole from '../Hooks/useUserRole';
 import { AuthContext } from '../provider/AuthProvider';
 
-const PrivateRoute = ({children}) => {
+const AdminRoute = ({children}) => {
     const {user, loading} = useContext(AuthContext);
     const location = useLocation();
+    const {role, AdminLoading} = useUserRole();
 
-    if(user){
+    if(user && role === "Admin"){
         return children
     }
 
-    if(loading) {
+    if(loading || AdminLoading) {
         return <div className='min-h-screen flex justify-center items-center'><span className="loading loading-spinner text-info"></span></div>
     }
 
@@ -20,4 +23,4 @@ const PrivateRoute = ({children}) => {
     );
 };
 
-export default PrivateRoute;
+export default AdminRoute;
