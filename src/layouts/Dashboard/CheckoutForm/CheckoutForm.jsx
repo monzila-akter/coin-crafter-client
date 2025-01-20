@@ -70,7 +70,7 @@ const CheckoutForm = ({ price, email, coins }) => {
         //    prepare payment data for backend
         const paymentData = {
             email,
-            amount: price * 100,
+            amount: price,
             coins,
             transactionId: paymentIntent.id,
             paymentStatus: paymentIntent.status,

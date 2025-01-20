@@ -11,6 +11,7 @@ import PrivateRoute from './PrivateRoute';
 import PurchaseCoin from '../layouts/Dashboard/PurchaseCoin/PurchaseCoin';
 import Payment from '../layouts/Dashboard/Payment/Payment';
 import PaymentHistory from '../layouts/Dashboard/PaymentHistory/PaymentHistory';
+import AddNewTask from '../layouts/Dashboard/AddNewTask/AddNewTask';
 
 const router = createBrowserRouter([
     {
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
             {
               path: "paymentHistory",
               element: <PaymentHistory></PaymentHistory>
+            },
+            {
+              path: "addNewTask",
+              element: <AddNewTask></AddNewTask>
             }
       ]
     }
