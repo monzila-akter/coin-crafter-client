@@ -7,7 +7,7 @@ const Withdrawal = () => {
   const { user } = useContext(AuthContext); // Authenticated user from the AuthProvider
   const axiosSecure = useAxiosSecure();
 
-  const [withdrawCoins, setWithdrawCoins] = useState(0);
+  const [withdrawCoins, setWithdrawCoins] = useState('');
   const [paymentSystem, setPaymentSystem] = useState('');
   const [accountNumber, setAccountNumber] = useState('');
 
@@ -24,7 +24,7 @@ const Withdrawal = () => {
   const handleWithdraw = async () => {
     if (!userData) return;
 
-    if (withdrawCoins > userData.coins) {
+    if (Number(withdrawCoins) > userData.coins) {
       alert('Insufficient coin balance');
       return;
     }
@@ -33,7 +33,7 @@ const Withdrawal = () => {
       const response = await axiosSecure.post('/withdrawals', {
         worker_email: userData.email,
         worker_name: userData.name,
-        withdrawal_coin: withdrawCoins,
+        withdrawal_coin: Number(withdrawCoins),
         withdrawal_amount: (withdrawCoins / 20).toFixed(2),
         payment_system: paymentSystem,
         account_number: accountNumber,
@@ -41,8 +41,8 @@ const Withdrawal = () => {
 
       alert(response.data.message);
     } catch (error) {
-      console.error('Withdrawal failed', error);
-      alert('Failed to process withdrawal');
+      console.error('Withdrawal failed', error.response.data.message);
+      alert(error.response.data.message);
     }
   };
 
@@ -74,7 +74,7 @@ const Withdrawal = () => {
             type="number"
             className="block w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             value={withdrawCoins}
-            onChange={(e) => setWithdrawCoins(Number(e.target.value))}
+            onChange={(e) => setWithdrawCoins(e.target.value)}
             max={userData.coins}
             min={0}
             required
@@ -108,7 +108,7 @@ const Withdrawal = () => {
           />
         </div>
 
-        {userData.coins >= 200 ? (
+        {userData.coins >= 200 && Number(withdrawCoins) >= 200 ? (
           <button
             type="submit"
             className="w-full bg-indigo-600 text-white font-medium py-2 px-4 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
