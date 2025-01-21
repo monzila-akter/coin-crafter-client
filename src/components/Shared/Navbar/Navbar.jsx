@@ -14,7 +14,7 @@ const Navbar = () => {
   const location = useLocation();
 
   // Fetch user data from the backend using TanStack Query
-  const { data: userInfo = {}, refetch } = useQuery({
+  const { data: userInfo = {}, refetch: countRefetch } = useQuery({
     queryKey: ["userInfo", user?.email],
     queryFn: async () => {
       if (!user?.email) return {};

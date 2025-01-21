@@ -12,6 +12,11 @@ import PurchaseCoin from '../layouts/Dashboard/PurchaseCoin/PurchaseCoin';
 import Payment from '../layouts/Dashboard/Payment/Payment';
 import PaymentHistory from '../layouts/Dashboard/PaymentHistory/PaymentHistory';
 import AddNewTask from '../layouts/Dashboard/AddNewTask/AddNewTask';
+import MyTasks from '../layouts/Dashboard/MyTasks/MyTasks';
+import TaskList from '../layouts/Dashboard/TaskLIst/TaskList';
+import TaskDetails from '../layouts/Dashboard/TaskDetails/TaskDetails';
+import MySubmissions from '../layouts/Dashboard/MySubmissions/MySubmissions';
+import Withdrawal from '../layouts/Dashboard/Withdrawal/Withdrawal';
 
 const router = createBrowserRouter([
     {
@@ -63,6 +68,28 @@ const router = createBrowserRouter([
             {
               path: "addNewTask",
               element: <AddNewTask></AddNewTask>
+            },
+            {
+              path: "myTasks",
+              element: <MyTasks></MyTasks>
+            },
+
+            // worker route
+            {
+              path: "taskList",
+              element: <TaskList></TaskList>
+            },
+            {
+              path: "taskDetails/:id",
+              element: <TaskDetails></TaskDetails>
+            },
+            {
+              path: "mySubmissions",
+              element: <MySubmissions></MySubmissions>
+            },
+            {
+              path: "withdrawals",
+              element: <Withdrawal></Withdrawal>
             }
       ]
     }

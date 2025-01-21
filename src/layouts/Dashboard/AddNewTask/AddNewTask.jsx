@@ -17,7 +17,6 @@ const AddNewTask = () => {
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
-  const queryClient = useQueryClient(); // Initialize QueryClient
 
   const { data: userData, refetch } = useQuery({
     queryKey: ["user-email", user?.email],
@@ -79,11 +78,9 @@ const AddNewTask = () => {
       // Save task to the backend
       const taskResponse = await axiosSecure.post("/tasks", taskData);
       if (taskResponse.data.insertedId) {
-        // Use invalidateQueries to refetch task data
-        queryClient.invalidateQueries({ queryKey: ["tasks"] }); // Replace 'tasks' with the correct queryKey for task list
-        queryClient.invalidateQueries({ queryKey: ["user-email", user?.email] }); // Invalidate user data query if necessary
+      
         
-        await refetch();
+        refetch();
 
         reset();
         Swal.fire({
