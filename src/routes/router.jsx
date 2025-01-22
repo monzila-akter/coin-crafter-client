@@ -17,6 +17,8 @@ import TaskList from '../layouts/Dashboard/TaskLIst/TaskList';
 import TaskDetails from '../layouts/Dashboard/TaskDetails/TaskDetails';
 import MySubmissions from '../layouts/Dashboard/MySubmissions/MySubmissions';
 import Withdrawal from '../layouts/Dashboard/Withdrawal/Withdrawal';
+import BuyerHome from '../layouts/Dashboard/BuyerHome/BuyerHome';
+import AdminHome from '../layouts/Dashboard/AdminHome/AdminHome';
 
 const router = createBrowserRouter([
     {
@@ -50,9 +52,18 @@ const router = createBrowserRouter([
             {
               path: "manageUsers",
               element: <ManageUsers></ManageUsers>
-            },
-            // buyer routes
+            }, 
 
+            {
+             path: "adminHome",
+             element: <AdminHome></AdminHome>
+            },
+
+            // buyer routes
+             {
+               path: "buyerHome",
+               element: <BuyerHome></BuyerHome>
+             },
             {
               path: "purchaseCoin",
               element: <PurchaseCoin></PurchaseCoin>
