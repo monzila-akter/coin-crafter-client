@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { NavLink, Link, useLocation } from "react-router-dom";
+import { NavLink, Link, useLocation, useNavigate } from "react-router-dom";
 import { FaBell, FaUserCircle, FaUserTie } from "react-icons/fa";
 import { BsBell, BsGithub } from "react-icons/bs";
 import coinIcon from "/image/icons8-coin-48.png";
@@ -12,6 +12,7 @@ const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const axiosSecurePublic = useAxiosPublic();
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Fetch user data from the backend using TanStack Query
   const { data: userInfo = {}, refetch: countRefetch } = useQuery({
@@ -23,6 +24,17 @@ const Navbar = () => {
     },
     enabled: !!user?.email, // Run query only when user is logged in
   });
+  
+
+  // Function to determine the dashboard home route
+  const getDashboardHomeRoute = () => {
+    const role = userInfo?.newRole || "User"; // Default to "User" if role not found
+    
+    if (role === "Admin") return "/dashboard/adminHome";
+    if (role === "Worker") return "/dashboard/workerHome";
+    if (role === "Buyer") return "/dashboard/buyerHome";
+    return "/dashboard"; // Default route
+  };
 
   // Determine if the current route is the dashboard route
   const isDashboard = location.pathname.startsWith("/dashboard");
@@ -59,18 +71,20 @@ const Navbar = () => {
         ) : (
           <div className="hidden lg:flex items-center space-x-6 justify-center flex-grow">
             <NavLink
-              to="/dashboard"
+              onClick={()=>navigate(getDashboardHomeRoute())}
               className="text-lg font-medium text-white hover:text-white"
             >
               Dashboard
             </NavLink>
             {/* Available Coins */}
-            <div className="text-lg font-medium btn bg-white border-none flex items-center">
+            {
+              user ? <div className="text-lg font-medium btn bg-white border-none flex items-center">
               <img className="w-8" src={coinIcon} alt="Coin Icon" />
               <span className="text-2xl font-semibold">
                 {userInfo?.coins || 0}
               </span>
-            </div>
+            </div> : ""
+            }
           </div>
         )}
 
@@ -78,21 +92,24 @@ const Navbar = () => {
         <div className="hidden lg:flex items-center space-x-4">
           {isDashboard ? (
             <>
-              {/* Notification Icon */}
-              <FaBell className="text-2xl text-white cursor-pointer" />
+              
               {/* User Profile */}
-              <div>
+              <div className="flex items-center">
                 {user ? (
-                  <img
-                    title={user?.displayName}
-                    className="w-10 object-cover h-10 border-2 border-yellow-400 rounded-full"
-                    src={user?.photoURL}
-                    alt="User"
-                  />
+                  <div><img
+                  title={user?.displayName}
+                  className="w-10 object-cover h-10 border-2 border-yellow-400 rounded-full"
+                  src={user?.photoURL}
+                  alt="User"
+                />
+                <p className="text-lg font-medium text-white">{user?.displayName}</p>
+                </div>
                 ) : (
                   <FaUserCircle className="text-4xl text-white" />
                 )}
               </div>
+              {/* Notification Icon */}
+              <FaBell className="text-2xl text-white cursor-pointer" />
             </>
           ) : (
             <>
@@ -177,7 +194,7 @@ const Navbar = () => {
       >
         {isDashboard ? (
           <>
-            <div className="block text-lg flex space-x-2 items-center bg-white py-2 px-3 w-24 rounded-lg text-black font-medium">
+            <div className="block text-lg flex space-x-2 items-center bg-white py-2 px-3 w-[120px] rounded-lg text-black font-medium">
               <img className="w-8" src={coinIcon} alt="Coin Icon" />
               <span className="text-2xl font-semibold">
                 {userInfo?.coins || 0}
@@ -186,8 +203,7 @@ const Navbar = () => {
             <div className="block text-xl font-medium">
                <span className="font-semibold btn bg-yellow-500 border-none text-white text-xl"><FaUserTie></FaUserTie> {userInfo?.newRole || "User"}</span>
             </div>
-            {/* Notification Icon for Mobile */}
-            <FaBell className="text-2xl text-white cursor-pointer" />
+            
             <NavLink className="block flex items-center space-x-2 text-lg text-white hover:text-white">
           {user ? (
             <img
@@ -200,21 +216,25 @@ const Navbar = () => {
             <FaUserCircle className="text-4xl text-white" />
           )}
         </NavLink>
+        {/* Notification Icon for Mobile */}
+        <FaBell className="text-2xl text-white cursor-pointer" />
           </>
         ) : (
           <>
             <NavLink
-              to="/dashboard"
+              onClick={() => navigate(getDashboardHomeRoute)}
               className="block text-lg font-medium text-white hover:text-white"
             >
               Dashboard
             </NavLink>
-            <div className="block text-lg flex space-x-2 items-center bg-white py-2 px-3 w-24 rounded-lg text-black font-medium">
+            {
+              user ? <div className="block text-lg flex space-x-2 items-center bg-white py-2 px-3 w-[120px] rounded-lg text-black font-medium">
               <img className="w-8" src={coinIcon} alt="Coin Icon" />
               <span className="text-2xl font-semibold">
                 {userInfo?.coins || 0}
               </span>
-            </div>
+            </div> : ""
+            }
             <NavLink className="block flex items-center space-x-2 text-lg text-white hover:text-white">
           {user ? (
             <img

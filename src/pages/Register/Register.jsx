@@ -68,7 +68,7 @@ const Register = () => {
                     draggable: true,
                   });
                   reset();
-                  navigate("/");
+                  navigate(data.role === 'Worker' ? '/dashboard/workerHome' : '/dashboard/buyerHome');
                 }
               });
             });

@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { AuthContext } from '../../../provider/AuthProvider';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import { Helmet } from 'react-helmet-async';
 
 const Withdrawal = () => {
   const { user } = useContext(AuthContext); // Authenticated user from the AuthProvider
@@ -51,10 +52,13 @@ const Withdrawal = () => {
 
   return (
     <div className="px-5 md:px-10 lg:px-14 py-16 w-full ">
+        <Helmet>
+            <title>CoinCrafter | Dashboard | Withdrawal</title>
+        </Helmet>
       <h2 className="text-4xl font-bold mb-12 text-center text-indigo-500">Withdrawal Form</h2>
 
   <div className='bg-indigo-50 px-5 md:px-10 lg:px-14 py-14 rounded-xl'>
-  <div className="mb-4">
+  <div className="mb-6">
         <p className="text-gray-700 mb-2 text-xl font-semibold">Total Coins: <strong>{userData.coins}</strong></p>
         <p className="text-gray-700 mb-2 text-xl font-semibold">
           Withdrawal Amount: <strong>${(withdrawCoins / 20).toFixed(2)}</strong>
@@ -111,7 +115,7 @@ const Withdrawal = () => {
         {userData.coins >= 200 && Number(withdrawCoins) >= 200 ? (
           <button
             type="submit"
-            className="w-full bg-indigo-600 text-white font-medium py-2 px-4 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="w-full bg-indigo-500 text-lg font-semibold text-white font-medium btn hover:bg-indigo-700"
           >
             Withdraw
           </button>

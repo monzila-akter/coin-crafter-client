@@ -20,6 +20,7 @@ import Withdrawal from '../layouts/Dashboard/Withdrawal/Withdrawal';
 import BuyerHome from '../layouts/Dashboard/BuyerHome/BuyerHome';
 import AdminHome from '../layouts/Dashboard/AdminHome/AdminHome';
 import AdminRoute from './AdminRoute';
+import ManageTasks from '../layouts/Dashboard/ManageTasks/ManageTasks';
 
 const router = createBrowserRouter([
     {
@@ -45,10 +46,7 @@ const router = createBrowserRouter([
       path: "/dashboard",
       element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
       children: [
-            {
-              path: "workerHome",
-              element: <WorkerHome></WorkerHome>
-            },
+            
             // admin panel
             {
               path: "manageUsers",
@@ -58,6 +56,10 @@ const router = createBrowserRouter([
             {
              path: "adminHome",
              element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
+            },
+            {
+              path: "manageTasks",
+              element: <AdminRoute><ManageTasks></ManageTasks></AdminRoute>
             },
 
             // buyer routes
@@ -87,7 +89,10 @@ const router = createBrowserRouter([
             },
 
             // worker route
-
+            {
+              path: "workerHome",
+              element: <WorkerHome></WorkerHome>
+            },
             
 
             {

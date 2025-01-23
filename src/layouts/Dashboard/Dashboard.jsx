@@ -142,7 +142,7 @@ const Dashboard = () => {
                 </NavLink>
                 <NavLink
                   className="text-xl font-semibold text-indigo-600 mb-6 flex items-center gap-3"
-                  to="/dashboard/manageTask"
+                  to="/dashboard/manageTasks"
                 >
                   <FaTasks className="text-2xl" /> Manage Tasks
                 </NavLink>

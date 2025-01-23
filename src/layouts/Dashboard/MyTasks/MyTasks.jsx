@@ -60,10 +60,8 @@ const MyTasks = () => {
         }
     };
 
-
     // handle delete function
-
-    const handleDelete = async (taskId) => {
+    const handleDelete = async (taskId, requiredWorkers, payableAmount) => {
         const confirmDelete = await Swal.fire({
             title: 'Are you sure?',
             text: 'This action will permanently delete the task!',
@@ -78,7 +76,13 @@ const MyTasks = () => {
                 const response = await axiosSecure.delete(`/tasks/${taskId}`);
 
                 if (response.status === 200) {
-                    Swal.fire('Deleted!', 'Task has been successfully deleted.', 'success');
+                    const refillAmount = requiredWorkers * payableAmount;
+                    Swal.fire({
+                        title: 'Deleted!',
+                        text: `Task has been successfully deleted. ${refillAmount} coins have been refunded.`,
+                        icon: 'success',
+                    });
+
                     refetch(); // Refetch tasks to update the list
                 }
             } catch (error) {
@@ -129,8 +133,9 @@ const MyTasks = () => {
                                     </td>
                                     <td>
                                         <button
-                                         onClick={() => handleDelete(task._id)} // Trigger delete when clicked
-                                         className="text-xl text-white bg-red-600 btn">
+                                            onClick={() => handleDelete(task._id, task.required_workers, task.total_payable)} // Pass required values
+                                            className="text-xl text-white bg-red-600 btn"
+                                        >
                                             <FaTrashAlt />
                                         </button>
                                     </td>

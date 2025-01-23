@@ -5,6 +5,8 @@ import { useContext } from "react";
 import { AuthContext } from "../../../provider/AuthProvider";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import { div } from "framer-motion/client";
+import { Helmet } from "react-helmet-async";
 
 const TaskDetails = () => {
   const { id } = useParams(); // Task ID from route params
@@ -56,13 +58,18 @@ const TaskDetails = () => {
     }
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div className="text-xl font-bold text-indigo-500 text-center">Loading...</div>;
   if (error) return <div>Error loading task details!</div>;
 
   return (
-    <div className="p-6 bg-gray-100 rounded-lg shadow-lg max-w-3xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">{task.task_title}</h1>
-      <img src={task.task_image_url} alt="" />
+    <div className="w-full py-14 px-5 md:px-14 ">
+        <Helmet>
+            <title>CoinCrafter | Dashboard | TaskDetails</title>
+        </Helmet>
+        <h2 className="text-4xl font-bold text-indigo-500 text-center mb-10">Task Details</h2>
+        <div className="bg-indigo-50 py-10 px-5 md:px-10 lg:px-14 rounded-lg">
+      <h1 className="text-2xl text-indigo-500 font-bold mb-4">{task.task_title}</h1>
+      <img className="w-full h-[200px] md:h-[300px] lg:h-[400px] object-cover mb-6 rounded-lg" src={task.task_image_url} alt="" />
       <p className="mb-2">
         <strong>Details:</strong> {task.task_detail}
       </p>
@@ -87,11 +94,12 @@ const TaskDetails = () => {
 
         <button
           type="submit"
-          className="mt-4 w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition"
+          className="mt-4 w-full bg-indigo-500 text-white text-lg font-semibold btn"
         >
           Submit
         </button>
       </form>
+    </div>
     </div>
   );
 };

@@ -1,5 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
+import { FaUsersGear } from "react-icons/fa6";
+import { FaCoins, FaUserShield } from "react-icons/fa";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 
 const AdminHome = () => {
@@ -25,46 +30,76 @@ const AdminHome = () => {
     const handleApprove = async (id) => {
         try {
             const response = await axiosSecure.patch(`/approval/withdrawals/${id}`);
-            alert(response.data.message);
+            Swal.fire({
+                title: (response.data.message),
+                icon: "success",
+                draggable: true
+              });
             refetch(); // Refresh data
         } catch (error) {
-            alert(error.response?.data?.message || "Failed to approve withdrawal.");
+            toast.error(error.response?.data?.message || "Failed to approve withdrawal.");
         }
     };
 
     if (statsLoading || withdrawalsLoading) return <div>Loading...</div>;
 
     return (
-        <div className="p-6 space-y-6">
+        <div className="w-full px-5 md:px-10 lg:px-14 py-14">
+            <Helmet>
+                <title>CoinCrafter | Dashboard | Home</title>
+            </Helmet>
+            <h2 className="text-4xl font-bold text-indigo-500 text-center mb-10">STATES</h2>
             {/* Admin Stats */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div className="p-4 bg-blue-100 rounded-lg shadow-lg">
-                    <h3 className="text-xl font-semibold text-blue-600">Total Workers</h3>
-                    <p className="text-2xl">{stats.totalWorkers}</p>
+                <div className="p-5 flex justify-center items-center bg-indigo-100 rounded-lg shadow-lg space-x-6">
+                    <div className="text-3xl text-indigo-500">
+                     <FaUsersGear></FaUsersGear>
+                    </div>
+                   <div className="">
+                   <h3 className="text-xl font-bold text-indigo-500">Total Workers</h3>
+                   <p className="text-2xl font-bold text-center text-indigo-500">{stats.totalWorkers}</p>
+                   </div>
                 </div>
-                <div className="p-4 bg-green-100 rounded-lg shadow-lg">
-                    <h3 className="text-xl font-semibold text-green-600">Total Buyers</h3>
-                    <p className="text-2xl">{stats.totalBuyers}</p>
+
+                <div className="p-5 flex justify-center items-center bg-green-100 rounded-lg shadow-lg space-x-6">
+                <div className="text-3xl text-green-500">
+                     <FaUserShield></FaUserShield>
+                    </div>
+                    <div>
+                    <h3 className="text-xl font-bold text-green-500">Total Buyers</h3>
+                    <p className="text-2xl font-bold text-center text-green-500">{stats.totalBuyers}</p>
+                    </div>
                 </div>
-                <div className="p-4 bg-yellow-100 rounded-lg shadow-lg">
-                    <h3 className="text-xl font-semibold text-yellow-600">Total Coins</h3>
-                    <p className="text-2xl">{stats.totalCoins}</p>
+                <div className="p-5 flex justify-center items-center bg-yellow-100 rounded-lg shadow-lg space-x-6">
+                <div className="text-3xl text-yellow-500">
+                     <FaCoins></FaCoins>
+                    </div>
+                    <div>
+                    <h3 className="text-xl font-bold text-yellow-500">Total Coins</h3>
+                    <p className="text-2xl font-bold text-center text-yellow-500">{stats.totalCoins}</p>
+                    </div>
                 </div>
-                <div className="p-4 bg-red-100 rounded-lg shadow-lg">
-                    <h3 className="text-xl font-semibold text-red-600">Total Payments</h3>
-                    <p className="text-2xl">{stats.totalPayments.toFixed(2)}</p>
+                <div className="p-5 flex justify-center items-center bg-red-100 rounded-lg shadow-lg space-x-6">
+                <div className="text-3xl text-red-500">
+                     <FaCoins></FaCoins>
+                    </div>
+                    <div>
+                    <h3 className="text-xl font-bold text-red-500">Total Payments</h3>
+                    <p className="text-2xl font-bold text-center text-red-500">{stats.totalPayments.toFixed(2)}</p>
+                    </div>
                 </div>
             </div>
 
             {/* Withdrawal Requests Table */}
-            <div className="bg-white p-6 rounded-lg shadow-lg">
-                <h2 className="text-2xl font-semibold mb-4">Withdrawal Requests</h2>
-                <div className="overflow-x-auto">
-                    <table className="table w-full table-zebra">
+            <div className="">
+                <h2 className="text-4xl font-bold text-center text-indigo-500 my-10">Withdrawal Requests</h2>
+                <div className="bg-indigo-50 px-5 lg:px-14 py-10 rounded-lg">
+                <div className="overflow-x-auto rounded-t-3xl">
+                    <table className="table">
                         <thead>
-                            <tr className="text-white bg-blue-500">
-                                <th className="p-3">#</th>
-                                <th className="p-3">User Email</th>
+                            <tr className="text-white text-lg font-medium bg-indigo-500">
+                                <th className="p-3">Sr.</th>
+                                <th className="p-3">User Info</th>
                                 <th className="p-3">Amount</th>
                                 <th className="p-3">Status</th>
                                 <th className="p-3">Actions</th>
@@ -85,7 +120,7 @@ const AdminHome = () => {
                                     <td className="p-3">
                                         {withdrawal.status === "pending" && (
                                             <button
-                                                className="px-4 py-2 bg-green-500 text-white rounded shadow-md hover:bg-green-600"
+                                                className="px-4 py-2 bg-green-600 text-white rounded shadow-md hover:bg-green-700"
                                                 onClick={() => handleApprove(withdrawal._id)}
                                             >
                                                 Approve
@@ -96,6 +131,7 @@ const AdminHome = () => {
                             ))}
                         </tbody>
                     </table>
+                </div>
                 </div>
             </div>
         </div>

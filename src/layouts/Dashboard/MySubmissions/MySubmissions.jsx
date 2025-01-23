@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../../../provider/AuthProvider";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const MySubmissions = () => {
     const { user } = useContext(AuthContext); // Get logged-in user info
@@ -34,9 +35,12 @@ const MySubmissions = () => {
     }
 
     return (
-        <div className="py-16">
+        <div className="py-16 w-full px-5 md:px-10 lg:px-14">
+            <Helmet>
+                <title>CoinCrafter | Dashboard | MySubmissions</title>
+            </Helmet>
             <h1 className="text-4xl font-bold mb-12 text-indigo-500 text-center">My Submissions</h1>
-            <div className="overflow-x-auto rounded-xl bg-indigo-50 px-5 md:px-10 py-5 md:py-14">
+            <div className=" rounded-xl bg-indigo-50 px-5 md:px-10 py-5 md:py-14">
                 <div className="rounded-t-3xl overflow-x-auto">
                     <table className="table">
                         {/* Table Head */}
