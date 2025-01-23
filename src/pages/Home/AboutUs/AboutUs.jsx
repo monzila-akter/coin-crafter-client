@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import Lottie from "lottie-react";
-import lottieFiles from "../../../assets/lottie.json"
+import lottieFiles from "../../../assets/lottiefiles/lottieAboutUs.json"
 
 const AboutUs = () => {
   return (

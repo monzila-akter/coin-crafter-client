@@ -5,6 +5,9 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../provider/AuthProvider";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import Lottie from "lottie-react";
+import registerLottie from "../../assets/lottiefiles/lottieRegister.json"
+import { Helmet } from "react-helmet-async";
 
 const image_hosting_key = import.meta.env.VITE_Image_Hosting_Key;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -60,7 +63,7 @@ const Register = () => {
               axiosSecurePublic.post("/register", userInfo).then((res) => {
                 if (res.data.insertedId) {
                   Swal.fire({
-                    title: "Successfully Signed Up!",
+                    title: "Successfully Registered!",
                     icon: "success",
                     draggable: true,
                   });
@@ -92,9 +95,14 @@ const Register = () => {
 
   return (
     <>
-      <div className="container mx-auto px-6 md:px-10 lg:px-14 py-16">
+    <Helmet>
+      <title>CoinCrafter | Register</title>
+    </Helmet>
+      <div className="container mx-auto flex flex-col md:flex-row items-center space-x-0 md:space-x-6 lg:space-x-10 w-full px-6 md:px-10 lg:px-14 py-16">
+        {/* form part */}
+        <div className=" w-full md:w-1/2 bg-indigo-50 px-5 md:px-6 lg:px-10 py-10 rounded-lg order-2 md:order-1">
         <div>
-          <h2 className="text-4xl font-bold text-center">Sign Up</h2>
+          <h2 className="text-4xl font-bold text-center text-indigo-500 mb-6">Register</h2>
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* Name Field */}
             <div className="form-control">
@@ -178,15 +186,20 @@ const Register = () => {
             {/* Submit Button */}
             <button
               type="submit"
-              className="btn w-full text-xl font-bold text-white bg-[#D1A054B3] mt-5 mb-5"
+              className="btn w-full text-xl font-bold text-white bg-indigo-500 mt-5 mb-5"
             >
               Sign Up
             </button>
 
-            <p className="text-xl font-bold text-[#D1A054] text-center mb-5">
-              Already registered? Go to <Link to="/login">log in</Link>
+            <p className="text-base font-medium text-yellow-500 text-center mb-5">
+              Already Have An Account? Go to <Link className="text-indigo-500" to="/login">Login</Link>
             </p>
           </form>
+        </div>
+        </div>
+        {/* lottie part */}
+        <div className=" w-full md:w-1/2 order-1 md:order-2">
+             <Lottie animationData={registerLottie}></Lottie>
         </div>
       </div>
     </>

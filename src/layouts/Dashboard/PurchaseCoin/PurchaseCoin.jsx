@@ -1,13 +1,17 @@
 import React from 'react';
 import { FaCoins } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, } from 'react-router-dom';
 import { buyerCoinOptions } from '../../../utils/coins';
+import { Helmet } from 'react-helmet-async';
 
 const PurchaseCoin = () => {
-  const navigate = useNavigate();
+
 
   return (
     <div className="w-full flex flex-col items-center px-5 md:px-10 lg:px-14 py-16">
+        <Helmet>
+            <title>CoinCrafter | Dashboard | PurchaseCoin</title>
+        </Helmet>
         <h2 className='text-4xl font-bold text-indigo-500 text-center mb-12'>Purchase Coin</h2>
       <div className='coin-cards grid grid-cols-1 lg:grid-cols-2 gap-10 '>
       {buyerCoinOptions.map((option, index) => (

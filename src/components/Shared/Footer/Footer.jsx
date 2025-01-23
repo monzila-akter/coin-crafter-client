@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 const Footer = () => {
   return (
     <footer className="bg-indigo-500 text-white py-14">
-      <div className="container mx-auto px-5 md:px-0 flex flex-col md:flex-row items-center justify-between">
+      <div className="container mx-auto px-5 md:px-10 flex flex-col md:flex-row items-center justify-between">
         {/* Left Section - Logo and Short Description */}
         <div className="flex flex-col items-start space-y-2">
           <NavLink
@@ -48,7 +48,7 @@ const Footer = () => {
         </div>
         
       </div>
-      <div className="border-b-2 border-white w-full container mx-auto mt-10"></div>
+      <div className="border-b-2 border-white w-full container mx-auto mt-10 md:px-10 px-5"></div>
 
       <div className="mt-4 md:mt-0 text-sm text-center md:text-right md:order-2">
           <p className="text-center mt-5">© {new Date().getFullYear()} CoinCrafter. All rights reserved.</p>

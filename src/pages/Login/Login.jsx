@@ -6,6 +6,9 @@ import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import { AuthContext } from '../../provider/AuthProvider';
 import Swal from 'sweetalert2';
 import toast from 'react-hot-toast';
+import Lottie from 'lottie-react';
+import lottieLogin from "../../assets/lottiefiles/lottieLogin.json"
+import { Helmet } from 'react-helmet-async';
 
 const Login = () => {
         const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -19,11 +22,11 @@ const Login = () => {
         result.user,
         console.log(result.user)
          Swal.fire({
-             title: "Successfully Sign In!",
+             title: "Successfully Logged In!",
              icon: "success",
              draggable: true
          });
-         navigate("/")
+         navigate("/dashboard")
          reset();
         
        })
@@ -54,12 +57,12 @@ const Login = () => {
                         console.log(res.data);
                         if (res.data.insertedId) {
                             Swal.fire({
-                                title: "Successfully Sign Up!",
+                                title: "Successfully Logged In!",
                                 icon: "success",
                                 draggable: true,
                             });
                         }
-                        navigate("/");
+                        navigate("/dashboard");
                     })
                     .catch(err => {
                         // Handle error if the user already exists
@@ -87,12 +90,17 @@ const Login = () => {
 
     return (
         <>
-        <div className='container mx-auto px-6 md:px-10 lg:px-14 py-16'>
-            {/* Main content */}
-            <div>
+        <Helmet>
+            <title>CoinCrafter | Login</title>
+        </Helmet>
+        <div className='container mx-auto w-full flex flex-col md:flex-row gap-y-10 md:gap-y-0 space-x-0 md:space-x-6 lg:space-x-0 items-center justify-between px-6 md:px-10 lg:px-14 py-16'>
+           {/* form part */}
+           <div className='w-full md:w-1/2 bg-indigo-50 px-5 py-10 order-2 md:order-1 rounded-lg'>
+             {/* Main content */}
+             <div>
                 {/* Form part */}
                 <div>
-                    <h2 className='text-4xl font-bold text-center'>Sign In</h2>
+                    <h2 className='text-4xl font-bold text-center text-indigo-500 mb-6'>Log In</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         {/* Email field */}
                         <div className="form-control">
@@ -114,23 +122,28 @@ const Login = () => {
                             )}
                         </div>
 
-                        <button type='submit' className='btn w-full text-xl font-bold text-white bg-[#D1A054B3] mt-5 mb-5'>Sign Up</button>
+                        <button type='submit' className='btn w-full text-xl font-bold text-white bg-indigo-500 mt-5 mb-5'>Login</button>
 
                         <Link to="">
-                            <p className='text-xl font-bold text-[#D1A054] text-center mb-5'>
-                                Already registered? Go to <Link to="/login">log in</Link>
+                            <p className='text-base font-medium text-yellow-500 text-center mb-5'>
+                                Don't Have An Account? Go to <Link className='text-indigo-500' to="/register">Register</Link>
                             </p>
                         </Link>
                     </form>
 
-                    <p className='text-xl font-medium text-center text-[#444444]mb-4'>Or sign Up with</p>
+                    <p className='text-xl font-medium text-center text-[#444444]mb-4'>Or sign In with</p>
                     <div className='flex space-x-14 items-center justify-center mt-4'>
-                        <button onClick={handleGoogleLogin} className='btn bg-indigo-400 text-white text-lg font-semibold w-full'>
+                        <button onClick={handleGoogleLogin} className='btn bg-transparent border-2 border-indigo-500 text-indigo-500 text-xl font-bold w-full'>
                             <FaGoogle /> Google
                         </button>
                     </div>
                 </div>
             </div>
+           </div>
+           {/* lottie part  */}
+           <div className=' w-full md:w-80 lg:w-96 order-1 md:order-2'>
+                <Lottie animationData={lottieLogin}></Lottie>
+           </div>
         </div>
     </>
     );

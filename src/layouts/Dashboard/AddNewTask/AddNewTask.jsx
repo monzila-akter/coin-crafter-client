@@ -6,7 +6,8 @@ import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { AuthContext } from "../../../provider/AuthProvider";
 import { useNavigate } from "react-router-dom";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 
 const image_hosting_key = import.meta.env.VITE_Image_Hosting_Key;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -27,7 +28,6 @@ const AddNewTask = () => {
   });
 
   const onSubmit = async (data) => {
-    console.log(data);
     if (!user || !user.email) {
       Swal.fire({
         icon: "error",
@@ -95,11 +95,14 @@ const AddNewTask = () => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full pt-12">
+        <Helmet>
+            <title>CoinCrafter | Dashboard | AddNewTask</title>
+        </Helmet>
       <h2 className="text-4xl font-bold text-indigo-500 text-center mb-10">
         Add New Task
       </h2>
-      <div className="bg-indigo-50 p-14 mx-24 mb-24">
+      <div className="bg-indigo-50 px-5 lg:px-10 py-10 md:py-14 mx-6 md:mx-14 lg:mx-24 mb-24 rounded-lg">
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* Task Title */}
           <label className="form-control mb-6">
@@ -125,7 +128,7 @@ const AddNewTask = () => {
           </label>
 
           {/* Workers and Payable Amount */}
-          <div className="flex gap-6">
+          <div className="flex flex-col md:flex-row gap-x-0 md:gap-x-6 ">
             <label className="form-control w-full mb-6">
               <span className="label-text text-xl font-semibold">
                 Required Workers*
@@ -192,7 +195,7 @@ const AddNewTask = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="btn text-xl font-bold text-white bg-gradient-to-l from-blue-500 to-indigo-500"
+            className="btn w-full text-xl font-bold text-white bg-indigo-500 "
           >
             Add Task <FaTasks className="ml-2" />
           </button>

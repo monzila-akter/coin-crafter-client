@@ -28,7 +28,7 @@ const Navbar = () => {
   const isDashboard = location.pathname.startsWith("/dashboard");
 
   return (
-    <nav className="bg-indigo-500 text-white">
+    <nav className=" bg-indigo-500 text-white">
       <div className="container mx-auto px-5 py-5 flex justify-between items-center">
         {/* Left Section - Logo */}
         <div className="flex items-center">

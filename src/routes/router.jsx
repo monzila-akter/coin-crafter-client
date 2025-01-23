@@ -19,6 +19,7 @@ import MySubmissions from '../layouts/Dashboard/MySubmissions/MySubmissions';
 import Withdrawal from '../layouts/Dashboard/Withdrawal/Withdrawal';
 import BuyerHome from '../layouts/Dashboard/BuyerHome/BuyerHome';
 import AdminHome from '../layouts/Dashboard/AdminHome/AdminHome';
+import AdminRoute from './AdminRoute';
 
 const router = createBrowserRouter([
     {
@@ -51,12 +52,12 @@ const router = createBrowserRouter([
             // admin panel
             {
               path: "manageUsers",
-              element: <ManageUsers></ManageUsers>
+              element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
             }, 
 
             {
              path: "adminHome",
-             element: <AdminHome></AdminHome>
+             element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
             },
 
             // buyer routes

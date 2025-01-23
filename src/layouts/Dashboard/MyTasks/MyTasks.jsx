@@ -4,6 +4,7 @@ import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet-async';
 
 const MyTasks = () => {
     const { user } = useContext(AuthContext);
@@ -88,7 +89,10 @@ const MyTasks = () => {
     };
 
     return (
-        <div className="w-full py-16 px-5 md:px-10 lg:px-14">
+        <div className="w-full py-16 px-5 lg:px-14">
+            <Helmet>
+                <title>CoinCrafter | Dashboard | MyTasks</title>
+            </Helmet>
             <h2 className="text-4xl font-bold text-indigo-500 text-center mb-12">My Tasks</h2>
             <div className="bg-indigo-50 rounded-lg px-5 py-5 md:py-14 md:px-10">
                 <h2 className="text-3xl font-semibold mb-6">Total Tasks: {tasks?.length}</h2>
@@ -114,7 +118,7 @@ const MyTasks = () => {
                                     <td>{task.created_by}</td>
                                     <td>{task.task_title}</td>
                                     <td>{task.required_workers}</td>
-                                    <td>${task.total_payable}</td>
+                                    <td>{task.total_payable}</td>
                                     <td>
                                         <button
                                             className="text-xl btn bg-yellow-500"

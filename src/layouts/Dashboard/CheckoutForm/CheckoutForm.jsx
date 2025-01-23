@@ -74,7 +74,7 @@ const CheckoutForm = ({ price, email, coins }) => {
             coins,
             transactionId: paymentIntent.id,
             paymentStatus: paymentIntent.status,
-            date: new Date(),
+            date: new Date().toDateString(),
         }
 
         await axiosSecure.post("/payments", paymentData)
