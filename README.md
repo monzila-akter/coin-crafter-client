@@ -7,7 +7,7 @@ Coin Crafter is a Micro-Task and Earning Platform where users can earn coins by 
 - Front-end Live Site Link:
 
 ## Admin Credentials:
-- **Username:** admin56@gmail.com
+- **Username:** admin45@gmail.com
 - **Password:** Admin45#
 
 ## Github Links: 
