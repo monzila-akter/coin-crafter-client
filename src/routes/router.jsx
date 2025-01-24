@@ -21,11 +21,13 @@ import BuyerHome from '../layouts/Dashboard/BuyerHome/BuyerHome';
 import AdminHome from '../layouts/Dashboard/AdminHome/AdminHome';
 import AdminRoute from './AdminRoute';
 import ManageTasks from '../layouts/Dashboard/ManageTasks/ManageTasks';
+import ErrorPage from '../pages/ErrorPage/ErrorPage';
 
 const router = createBrowserRouter([
     {
       path: "/",
       element: <MainLayout></MainLayout>,
+      errorElement: <ErrorPage></ErrorPage>,
       children: [
         {
             path: "/",

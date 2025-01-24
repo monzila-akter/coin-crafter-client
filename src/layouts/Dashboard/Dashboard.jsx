@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import Navbar from '../../components/Shared/Navbar/Navbar';
 import Footer from '../../components/Shared/Footer/Footer';
-import "./dashboard.css";
+import './dashboard.css';
 import {
   FaBars,
   FaTimes,
@@ -37,27 +37,26 @@ const Dashboard = () => {
 
   return (
     <div>
-        <Helmet>
-            <title>CoinCrafter | Dashboard</title>
-        </Helmet>
-        <Toaster></Toaster>
+      <Helmet>
+        <title>CoinCrafter | Dashboard</title>
+      </Helmet>
+      <Toaster />
       <Navbar />
       {/* Hamburger menu for small and medium screens */}
-     
-      <div className="w-full flex min-h-screen">
       <button
-        className="left-4 z-50 text-2xl lg:hidden"
+        className="lg:hidden absolute top-20 left-5 z-50 text-2xl"
         onClick={toggleSidebar}
       >
         {isSidebarOpen ? <FaTimes /> : <FaBars />}
       </button>
+
+      <div className="w-full flex min-h-screen">
         {/* Sidebar */}
         <div
           className={`fixed top-0 left-0 z-40 min-h-screen w-72 bg-yellow-500 px-5 py-12 transition-transform duration-300 ease-in-out transform ${
             isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
           } lg:relative lg:translate-x-0 lg:w-96 lg:flex lg:justify-center`}
         >
-            
           <ul>
             {/* Worker routes */}
             {role === 'Worker' && (
@@ -153,16 +152,15 @@ const Dashboard = () => {
 
         {/* Main content */}
         <div
-          className="w-full overflow-x-hidden flex flex-col  justify-center transition-all duration-300 "
+          className="w-full overflow-x-hidden flex flex-col justify-center transition-all duration-300"
           onClick={() => isSidebarOpen && setIsSidebarOpen(false)} // Close sidebar when clicking outside
         >
-          <div className='min-h-screen w-full overflow-x-hidden flex justify-center mx-auto'>
-          <Outlet />
+          <div className="min-h-screen w-full overflow-x-hidden flex justify-center mx-auto">
+            <Outlet />
           </div>
           <Footer />
         </div>
       </div>
-      
     </div>
   );
 };

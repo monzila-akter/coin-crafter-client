@@ -78,10 +78,7 @@ const AddNewTask = () => {
       // Save task to the backend
       const taskResponse = await axiosSecure.post("/tasks", taskData);
       if (taskResponse.data.insertedId) {
-      
-        
         refetch();
-
         reset();
         Swal.fire({
           position: "top-end",

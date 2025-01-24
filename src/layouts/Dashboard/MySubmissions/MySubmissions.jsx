@@ -48,7 +48,7 @@ const MySubmissions = () => {
                             <tr className="text-lg text-white">
                                 <th>Sr</th>
                                 <th>Title</th>
-                                <th>Amount</th>
+                                <th>Amount(Coin)</th>
                                 <th>Date</th>
                                 <th>Status</th>
                             </tr>
@@ -62,7 +62,7 @@ const MySubmissions = () => {
                                         {submission.task_title}
                                         <p>{submission.buyer_name}</p>
                                     </td>
-                                    <td>$ {submission.payable_amount}</td>
+                                    <td> {submission.payable_amount}</td>
                                     <td>{new Date(submission.current_date).toLocaleDateString()}</td>
                                     <td
                                         className={` ${
