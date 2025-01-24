@@ -3,19 +3,18 @@
 Coin Crafter is a Micro-Task and Earning Platform where users can earn coins by completing tasks. The platform includes features for workers, buyers, and admins to manage tasks, payments, and withdrawals effectively.
 
 ## Live Site URL:
-- Admin email: admin56@gmail.com
-- Admin password: Admin45#
 
 - Front-end Live Site Link:
+
+## Admin Credentials:
+- **Username:** admin56@gmail.com
+- **Password:** Admin45#
+
+## Github Links: 
 
 - Client Side Github Repository Link: https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-monzila-akter
 
 - Server Side Github Repository Link: https://github.com/Programming-Hero-Web-Course4/b10a12-server-side-monzila-akter
-
-
-## Admin Credentials:
-- **Username:** calvin@gmail.com
-- **Password:** 123456Gh#
 
 ## Features:
 - User roles: Worker, Buyer, and Admin
