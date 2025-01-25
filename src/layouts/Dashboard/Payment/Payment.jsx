@@ -12,11 +12,11 @@ const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_Pk);
 
 const Payment = () => {
     const params = useParams();
-    console.log('params', params);
+
     const {user} = useContext(AuthContext);
     
     const currentCoinOption = buyerCoinOptions.find((item) => item.coins === Number(params.coins));
-    console.log('currentCoinOption', currentCoinOption);
+
 
     const {coins, price} = currentCoinOption;
     

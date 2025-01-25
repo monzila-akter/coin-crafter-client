@@ -47,6 +47,7 @@ const Withdrawal = () => {
         icon: "success",
         draggable: true
       });
+      reset();
 
     } catch (error) {
       console.error('Withdrawal failed', error.response.data.message);
@@ -83,7 +84,7 @@ const Withdrawal = () => {
           <label className="block text-sm font-medium text-gray-700 mb-1">Coin to Withdraw</label>
           <input
             type="number"
-            className="block w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="block w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-cyan-700 focus:border-cyan-700 sm:text-sm"
             value={withdrawCoins}
             onChange={(e) => setWithdrawCoins(e.target.value)}
             max={userData.coins}
@@ -95,7 +96,7 @@ const Withdrawal = () => {
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Payment System</label>
           <select
-            className="block w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="block w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-cyan-700 focus:border-cyan-700 sm:text-sm"
             value={paymentSystem}
             onChange={(e) => setPaymentSystem(e.target.value)}
             required
@@ -112,7 +113,7 @@ const Withdrawal = () => {
           <label className="block text-sm font-medium text-gray-700 mb-1">Account Number</label>
           <input
             type="text"
-            className="block w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="block w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-cyan-700 focus:border-cyan-700 sm:text-sm"
             value={accountNumber}
             onChange={(e) => setAccountNumber(e.target.value)}
             required
