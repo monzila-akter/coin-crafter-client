@@ -32,7 +32,7 @@ const Hero = () => {
               className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-center"
               {...animationSettings}
             >
-              <h1 className="text-3xl md:text-5xl font-bold mb-4 text-yellow-300">
+              <h1 className="text-3xl md:text-5xl font-bold mb-4 text-white">
                 Empower Your Development
               </h1>
               <p className="text-lg md:text-xl text-white">
@@ -52,7 +52,7 @@ const Hero = () => {
               className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-center"
               {...animationSettings}
             >
-              <h1 className="text-3xl md:text-5xl font-bold mb-4 text-yellow-300">
+              <h1 className="text-3xl md:text-5xl font-bold mb-4 text-white">
                 Unlock New Opportunities
               </h1>
               <p className="text-lg md:text-xl text-white">
@@ -72,7 +72,7 @@ const Hero = () => {
               className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-center"
               {...animationSettings}
             >
-              <h1 className="text-3xl md:text-5xl font-bold mb-4 text-yellow-300">
+              <h1 className="text-3xl md:text-5xl font-bold mb-4 text-white">
                 Join Our Developer Community
               </h1>
               <p className="text-lg md:text-xl text-white">

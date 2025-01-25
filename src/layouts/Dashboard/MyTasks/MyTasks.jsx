@@ -5,11 +5,13 @@ import { useQuery } from '@tanstack/react-query';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import { Helmet } from 'react-helmet-async';
+import useUsers from '../../../Hooks/useUsers';
 
 const MyTasks = () => {
     const { user } = useContext(AuthContext);
     const axiosSecure = useAxiosSecure();
-    const { data: tasks = [], refetch } = useQuery({
+    const {userInfo, refetch} = useUsers();
+    const { data: tasks = [], refetch: updateRefetch } = useQuery({
         queryKey: ['tasks-detail', user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/tasks/${user.email}`);
@@ -52,7 +54,7 @@ const MyTasks = () => {
             if (response.status === 200) {
                 Swal.fire('Updated!', 'Task has been successfully updated.', 'success');
                 setIsModalOpen(false);
-                refetch(); // Refetch tasks to update the list
+                updateRefetch(); // Refetch tasks to update the list
             }
         } catch (error) {
             Swal.fire('Error', 'Failed to update task', 'error');
@@ -97,13 +99,13 @@ const MyTasks = () => {
             <Helmet>
                 <title>CoinCrafter | Dashboard | MyTasks</title>
             </Helmet>
-            <h2 className="text-4xl font-bold text-indigo-500 text-center mb-12">My Tasks</h2>
-            <div className="bg-indigo-50 rounded-lg px-5 py-5 md:py-14 md:px-10">
+            <h2 className="text-4xl font-bold text-cyan-700 text-center mb-12">My Tasks</h2>
+            <div className="bg-cyan-50 rounded-lg px-5 py-5 md:py-14 md:px-10">
                 <h2 className="text-3xl font-semibold mb-6">Total Tasks: {tasks?.length}</h2>
                 <div className="overflow-x-auto rounded-t-3xl">
                     <table className="table">
                         {/* Table Head */}
-                        <thead className="bg-indigo-500">
+                        <thead className="bg-cyan-700">
                             <tr className="text-lg text-white">
                                 <th>Sr.</th>
                                 <th>Email</th>

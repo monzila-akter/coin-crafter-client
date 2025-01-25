@@ -4,6 +4,7 @@ import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { AuthContext } from "../../../../provider/AuthProvider";
 import { FaCoins, FaFileImport } from "react-icons/fa";
 import { FaClockRotateLeft } from "react-icons/fa6";
+import { Helmet } from "react-helmet-async";
 
 
 const WorkerHome = () => {
@@ -31,21 +32,24 @@ const WorkerHome = () => {
   });
 
   if (statsLoading || submissionsLoading) {
-    return <div className="text-center">Loading...</div>;
+    return <div className="text-center text-2xl font-bold text-cyan-700 flex justify-center items-center">Loading...</div>;
   }
 
   return (
     <div className=" w-full py-14 px-5 lg:px-14 ">
-        <h2 className="text-4xl font-bold text-indigo-500 text-center mb-10">STATES</h2>
+      <Helmet>
+        <title>CoinCrafter | Dashoard | Home</title>
+      </Helmet>
+        <h2 className="text-4xl font-bold text-cyan-700 text-center mb-10">STATES</h2>
       {/* Worker Stats */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div className="p-5 bg-indigo-200 rounded-lg flex items-center justify-center space-x-6">
-            <div className="text-indigo-500 text-3xl">
+        <div className="p-5 bg-cyan-100 rounded-lg flex items-center justify-center space-x-6">
+            <div className="text-cyan-700 text-3xl">
                 <FaFileImport></FaFileImport>
             </div>
           <div>
-          <h3 className="text-2xl font-bold text-indigo-500 mb-4">Total Submissions</h3>
-          <p className="text-2xl text-indigo-500 font-bold text-center">{stats.totalSubmissions}</p>
+          <h3 className="text-2xl font-bold text-cyan-700 mb-4">Total Submissions</h3>
+          <p className="text-2xl text-cyan-700 font-bold text-center">{stats.totalSubmissions}</p>
           </div>
         </div>
         <div className="p-5 bg-yellow-100 rounded-lg flex items-center justify-center space-x-6">
@@ -53,8 +57,8 @@ const WorkerHome = () => {
                 <FaClockRotateLeft></FaClockRotateLeft>
             </div>
           <div>
-          <h3 className="text-2xl font-bold text-yellow-500 mb-4">
-            Total Pending Submissions
+          <h3 className="text-2xl font-bold text-center text-yellow-500 mb-4">
+            Pending Submissions
           </h3>
           <p className="text-2xl text-yellow-500 font-bold text-center">{stats.totalPendingSubmissions}</p>
           </div>
@@ -73,11 +77,11 @@ const WorkerHome = () => {
 
       {/* Approved Submissions Table */}
       <div className="">
-        <h2 className="text-4xl font-bold text-indigo-500 my-10 text-center">Approved Submissions</h2>
-        <div className="bg-indigo-50 rounded-lg px-5 lg:px-14 py-10">
+        <h2 className="text-4xl font-bold text-cyan-700 my-10 text-center">Approved Submissions</h2>
+        <div className="bg-cyan-50 rounded-lg px-5 lg:px-14 py-10">
         <div className="overflow-x-auto rounded-t-3xl">
           <table className="table">
-            <thead className="bg-indigo-500">
+            <thead className="bg-cyan-700">
               <tr className="text-white text-lg font-bold">
                 <th className="p-3">Sr.</th>
                 <th className="p-3">Task Title</th>

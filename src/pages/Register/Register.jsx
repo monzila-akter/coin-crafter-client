@@ -100,9 +100,9 @@ const Register = () => {
     </Helmet>
       <div className="container mx-auto flex flex-col md:flex-row items-center space-x-0 md:space-x-6 lg:space-x-10 w-full px-6 md:px-10 lg:px-14 py-16">
         {/* form part */}
-        <div className=" w-full md:w-1/2 bg-indigo-50 px-5 md:px-6 lg:px-10 py-10 rounded-lg order-2 md:order-1">
+        <div className=" w-full md:w-1/2 bg-cyan-50 px-5 md:px-6 lg:px-10 py-10 rounded-lg order-2 md:order-1">
         <div>
-          <h2 className="text-4xl font-bold text-center text-indigo-500 mb-6">Register</h2>
+          <h2 className="text-4xl font-bold text-center text-cyan-700 mb-6">Register</h2>
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* Name Field */}
             <div className="form-control">
@@ -126,7 +126,7 @@ const Register = () => {
               <input
                 type="file"
                 {...register("profile_image", { required: true })}
-                className="file-input w-full max-w-xs"
+                className="file-input w-full"
               />
               {errors.profile_image && (
                 <span className="text-sm text-red-600">Profile picture is required</span>
@@ -186,13 +186,13 @@ const Register = () => {
             {/* Submit Button */}
             <button
               type="submit"
-              className="btn w-full text-xl font-bold text-white bg-indigo-500 mt-5 mb-5"
+              className="btn w-full text-xl font-bold text-white bg-cyan-700 mt-5 mb-5"
             >
               Sign Up
             </button>
 
             <p className="text-base font-medium text-yellow-500 text-center mb-5">
-              Already Have An Account? Go to <Link className="text-indigo-500" to="/login">Login</Link>
+              Already Have An Account? Go to <Link className="text-cyan-700" to="/login">Login</Link>
             </p>
           </form>
         </div>

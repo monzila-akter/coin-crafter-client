@@ -4,7 +4,7 @@ Coin Crafter is a Micro-Task and Earning Platform where users can earn coins by 
 
 ## Live Site URL:
 
-- Front-end Live Site Link:
+- Front-end Live Site Link: https://coin-crafter-client.web.app/
 
 ## Admin Credentials:
 - **Username:** admin45@gmail.com

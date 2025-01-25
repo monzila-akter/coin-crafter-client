@@ -4,30 +4,22 @@ import { FaBell, FaUserCircle, FaUserTie } from "react-icons/fa";
 import { BsBell, BsGithub } from "react-icons/bs";
 import coinIcon from "/image/icons8-coin-48.png";
 import { AuthContext } from "../../../provider/AuthProvider";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
-import { div } from "framer-motion/client";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import useUsers from "../../../Hooks/useUsers";
+
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { user, logOut } = useContext(AuthContext);
-  const axiosSecurePublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const location = useLocation();
   const navigate = useNavigate();
   const [notifications, setNotifications] = useState([]);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const popupRef = useRef(null);
-
-  // Fetch user data from the backend using TanStack Query
-  const { data: userInfo = {}, refetch: countRefetch } = useQuery({
-    queryKey: ["userInfo", user?.email],
-    queryFn: async () => {
-      if (!user?.email) return {};
-      const response = await axiosSecurePublic.get(`/user/${user?.email}`);
-      return response.data;
-    },
-    enabled: !!user?.email, // Run query only when user is logged in
-  });
+ 
+  const {userInfo, refetch} = useUsers();
 
 
   // Function to determine the dashboard home route
@@ -46,7 +38,7 @@ const Navbar = () => {
   // Fetch notifications from backend
   const getNotifications = async () => {
     if (!user?.email) setNotifications([]);
-    const response = await axiosSecurePublic.get(`/notification/${user?.email}`);
+    const response = await axiosSecure.get(`/notification/${user?.email}`);
 
     setNotifications(response.data);
   }
@@ -54,7 +46,6 @@ const Navbar = () => {
   // Handle notification click (toggle popup visibility)
   const toggleNotificationPopup = () => {
     setIsNotificationOpen(!isNotificationOpen);
-    console.log('isNotificationOpen', isNotificationOpen);
     
     if (!isNotificationOpen) {
       getNotifications();
@@ -63,10 +54,11 @@ const Navbar = () => {
     }
   };
 
+
   // Close popup when clicking outside
   const handleClickOutside = (event) => {
-    if (popupRef.current && !popupRef.current.contains(event.target)) {
-      setNotificationOpen(false);
+    if (popupRef.current && !popupRef.current.contains(event.target) && !event.target.closest(".notification-icon")) {
+      setIsNotificationOpen(false);
     }
   };
 
@@ -80,16 +72,17 @@ const Navbar = () => {
 
 
   return (
-    <nav className=" bg-indigo-500 text-white">
+    <nav className=" bg-cyan-800 text-white">
       <div className="container mx-auto px-5 py-5 flex justify-between items-center">
         {/* Left Section - Logo */}
+
         <div className="flex items-center">
-          <NavLink
+          <Link
             to="/"
-            className="text-2xl font-bold tracking-wide text-white hover:text-white transition"
+            className="text-2xl ml-10 lg:ml-0 font-bold tracking-wide text-white hover:text-white transition"
           >
-            <span className="text-yellow-400">COIN</span>CRAFTER
-          </NavLink>
+            <span className="text-cyan-300">COIN</span>CRAFTER
+          </Link>
         </div>
 
         {/* Center Section - Dashboard Navbar */}
@@ -103,19 +96,19 @@ const Navbar = () => {
               </span>
             </div>
             {/* User Role */}
-            <div className="text-lg font-semibold text-white btn bg-yellow-500 border-none ">
+            <div className="text-lg font-semibold btn bg-cyan-300 border-none ">
               <FaUserTie />
               <span className="font-semibold">{userInfo?.newRole || "User"}</span>
             </div>
           </div>
         ) : (
           <div className="hidden lg:flex items-center space-x-6 justify-center flex-grow">
-            <NavLink
+            <Link
               onClick={() => navigate(getDashboardHomeRoute())}
               className="text-lg font-medium text-white hover:text-white"
             >
               Dashboard
-            </NavLink>
+            </Link>
             {/* Available Coins */}
             {
               user ? <div className="text-lg font-medium btn bg-white border-none flex items-center">
@@ -138,7 +131,7 @@ const Navbar = () => {
                 {user ? (
                   <div className="flex flex-col justify-center items-center"><img
                     title={user?.displayName}
-                    className="w-10 object-cover h-10 border-2 border-yellow-400 rounded-full"
+                    className="w-10 object-cover h-10 border-2 border-cyan-300 rounded-full"
                     src={user?.photoURL}
                     alt="User"
                   />
@@ -149,9 +142,9 @@ const Navbar = () => {
                 )}
               </div>
               {/* Notification Icon */}
-              <div className="relative">
+              <div className="relative notification-icon">
                 <FaBell
-                  className="text-2xl text-white cursor-pointer"
+                  className="text-2xl text-white cursor-pointer hover:text-cyan-300"
                   onClick={toggleNotificationPopup}
                 />
 
@@ -183,7 +176,7 @@ const Navbar = () => {
                 {user ? (
                   <img
                     title={user?.displayName}
-                    className="w-10 h-10 object-cover border-2 border-yellow-400 rounded-full"
+                    className="w-10 h-10 object-cover border-2 border-cyan-300 rounded-full"
                     src={user?.photoURL}
                     alt="User"
                   />
@@ -194,7 +187,7 @@ const Navbar = () => {
               {user ? (
                 <button
                   onClick={logOut}
-                  className="text-lg font-medium btn bg-transparent border-white text-white border-2 hover:bg-transparent hover:border-yellow-400 hover:text-yellow-400"
+                  className="text-lg font-medium btn bg-transparent border-white text-white border-2 hover:bg-transparent hover:border-cyan-300 hover:text-cyan-300"
                 >
                   Logout
                 </button>
@@ -202,13 +195,13 @@ const Navbar = () => {
                 <>
                   <Link
                     to="/login"
-                    className="text-lg font-medium btn bg-transparent border-white text-white border-2 hover:bg-transparent hover:border-yellow-400 hover:text-yellow-400"
+                    className="text-lg font-medium btn bg-transparent border-white text-white border-2 hover:bg-transparent hover:border-cyan-300 hover:text-cyan-300"
                   >
                     Login
                   </Link>
                   <Link
                     to="/register"
-                    className="text-lg font-medium btn bg-transparent border-white text-white border-2 hover:bg-transparent hover:border-yellow-400 hover:text-yellow-400"
+                    className="text-lg font-medium btn bg-transparent border-white text-white border-2 hover:bg-transparent hover:border-cyan-300 hover:text-cyan-300"
                   >
                     Register
                   </Link>
@@ -219,7 +212,7 @@ const Navbar = () => {
                 href="https://github.com/monzila-akter"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center bg-yellow-500 hover:bg-gray-800 text-white btn border-none text-lg rounded transition"
+                className="flex items-center bg-cyan-300 hover:bg-gray-800 hover:text-white btn border-none text-lg rounded transition"
               >
                 <BsGithub className="mr-2" />
                 Join as Developer
@@ -255,8 +248,9 @@ const Navbar = () => {
       {/* Mobile Menu */}
       <div
         className={`${menuOpen ? "block" : "hidden"
-          } lg:hidden bg-indigo-500 text-white space-y-2 p-4`}
+          } lg:hidden bg-cyan-800 text-white space-y-2 p-4`}
       >
+       
         {isDashboard ? (
           <>
             <div className="block text-lg flex space-x-2 items-center bg-white py-2 px-3 w-[120px] rounded-lg text-black font-medium">
@@ -266,7 +260,7 @@ const Navbar = () => {
               </span>
             </div>
             <div className="block text-xl font-medium">
-              <span className="font-semibold btn bg-yellow-500 border-none text-white text-xl"><FaUserTie></FaUserTie> {userInfo?.newRole || "User"}</span>
+              <span className="font-semibold btn bg-cyan-300 border-none text-white text-xl"><FaUserTie></FaUserTie> {userInfo?.newRole || "User"}</span>
             </div>
 
             <NavLink className="block flex items-center space-x-2 text-lg text-white hover:text-white">
@@ -286,7 +280,7 @@ const Navbar = () => {
               )}
             </NavLink>
             {/* Notification Icon for Mobile */}
-            <div className="relative">
+            <div className="relative notification-icon">
               <FaBell
                 className="text-2xl text-white cursor-pointer"
                 onClick={toggleNotificationPopup}
@@ -315,12 +309,12 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <NavLink
+            <Link
               onClick={() => navigate(getDashboardHomeRoute)}
               className="block text-lg font-medium text-white hover:text-white"
             >
               Dashboard
-            </NavLink>
+            </Link>
             {
               user ? <div className="block text-lg flex space-x-2 items-center bg-white py-2 px-3 w-[120px] rounded-lg text-black font-medium">
                 <img className="w-8" src={coinIcon} alt="Coin Icon" />
@@ -344,7 +338,7 @@ const Navbar = () => {
             {user ? (
               <button
                 onClick={logOut}
-                className="text-lg font-medium btn bg-transparent border-white text-white border-2 hover:bg-transparent hover:border-yellow-400 hover:text-yellow-400"
+                className="text-lg font-medium btn bg-transparent border-white text-white border-2 hover:bg-transparent hover:border-cyan-300 hover:text-cyan-300"
               >
                 Logout
               </button>
@@ -352,13 +346,13 @@ const Navbar = () => {
               <>
                 <Link
                   to="/login"
-                  className="text-lg font-medium btn bg-transparent border-white text-white border-2 hover:bg-transparent hover:border-yellow-400 hover:text-yellow-400"
+                  className="text-lg font-medium btn bg-transparent border-white text-white border-2 hover:bg-transparent hover:border-cyan-300 hover:text-cyan-300"
                 >
                   Login
                 </Link>
                 <Link
                   to="/register"
-                  className="ml-4 text-lg font-medium btn bg-transparent border-white text-white border-2 hover:bg-transparent hover:border-yellow-400 hover:text-yellow-400"
+                  className="ml-4 text-lg font-medium btn bg-transparent border-white text-white border-2 hover:bg-transparent hover:border-cyan-300 hover:text-cyan-300"
                 >
                   Register
                 </Link>
@@ -369,7 +363,7 @@ const Navbar = () => {
               href="https://github.com/monzila-akter"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center bg-yellow-500 hover:bg-gray-800 text-white btn border-none text-lg rounded transition"
+              className="flex items-center bg-cyan-300 hover:bg-gray-800 hover:text-white btn border-none text-lg rounded transition"
             >
               <BsGithub className="mr-2" />
               Join as Developer

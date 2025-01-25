@@ -6,6 +6,7 @@ import { AuthContext } from "../../../provider/AuthProvider";
 import { FaCoins, FaTasks } from "react-icons/fa";
 import { FaClockRotateLeft, FaMoneyCheckDollar } from "react-icons/fa6";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const BuyerHome = () => {
     const { user } = useContext(AuthContext);
@@ -80,16 +81,19 @@ const BuyerHome = () => {
 
     return (
         <div className="w-full px-6 md:px-10 lg:px-14 py-14">
+            <Helmet>
+                <title>CoinCrafter | Dashboard | Home</title>
+            </Helmet>
             {/* Buyer states */}
-            <h2 className="text-4xl font-bold text-center text-indigo-500 mb-10">STATES</h2>
+            <h2 className="text-4xl font-bold text-center text-cyan-700 mb-10">STATES</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-                <div className="flex items-center justify-center space-x-6 bg-indigo-200 rounded-xl text-white p-6">
+                <div className="flex items-center justify-center space-x-6 bg-cyan-100 rounded-xl text-white p-6">
                     <div>
-                        <FaTasks className="text-4xl text-indigo-500"></FaTasks>
+                        <FaTasks className="text-4xl text-cyan-700"></FaTasks>
                     </div>
                     <div>
-                        <h2 className="text-3xl font-bold text-indigo-500 mb-4">Total Tasks</h2>
-                        <p className="text-2xl font-bold text-center text-indigo-500">{states.totalTaskCount}</p>
+                        <h2 className="text-3xl font-bold text-cyan-700 mb-4">Total Tasks</h2>
+                        <p className="text-2xl font-bold text-center text-cyan-700">{states.totalTaskCount}</p>
                     </div>
                 </div>
                 <div className=" flex items-center justify-center space-x-6 bg-rose-200 rounded-xl text-white p-6">
@@ -114,11 +118,11 @@ const BuyerHome = () => {
 
             {/* Submissions table */}
             <div>
-                <h2 className="text-4xl font-bold text-indigo-500 text-center my-10">Pending Submissions</h2>
-                <div className="bg-indigo-50 rounded-lg px-5 py-10 lg:px-14">
+                <h2 className="text-4xl font-bold text-cyan-700 text-center my-10">Pending Submissions</h2>
+                <div className="bg-cyan-50 rounded-lg px-5 py-10 lg:px-14">
                     <div className="overflow-x-auto rounded-t-3xl">
                         <table className="table w-full">
-                            <thead className="bg-indigo-500">
+                            <thead className="bg-cyan-700">
                                 <tr className='text-lg text-white'>
                                     <th>Worker Name</th>
                                     <th>Task Title</th>
@@ -166,7 +170,7 @@ const BuyerHome = () => {
             {selectedSubmission && (
                 <div className="modal modal-open">
                     <div className="modal-box">
-                        <h3 className="font-bold text-indigo-500 text-xl mb-4">Submission Details</h3>
+                        <h3 className="font-bold text-cyan-700 text-xl mb-4">Submission Details</h3>
                         <p className="mb-2">
                             <strong>Worker Name:</strong> {selectedSubmission.worker_name}
                         </p>
@@ -174,7 +178,7 @@ const BuyerHome = () => {
                             <strong>Task Title:</strong> {selectedSubmission.task_title}
                         </p>
                         <p className="mb-2">
-                            <strong>Payable Amount:</strong> ${selectedSubmission.payable_amount}
+                            <strong>Payable Amount:</strong> {selectedSubmission.payable_amount}
                         </p>
                         <p className="mb-2">
                             <strong>Submission Notes:</strong>{" "}
@@ -182,7 +186,7 @@ const BuyerHome = () => {
                         </p>
                         <div className="modal-action">
                             <button
-                                className="btn bg-indigo-500 text-white"
+                                className="btn bg-cyan-700 text-white"
                                 onClick={() => setSelectedSubmission(null)} // Close modal
                             >
                                 Close

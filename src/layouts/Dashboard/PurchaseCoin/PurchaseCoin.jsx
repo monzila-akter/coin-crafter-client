@@ -12,13 +12,13 @@ const PurchaseCoin = () => {
         <Helmet>
             <title>CoinCrafter | Dashboard | PurchaseCoin</title>
         </Helmet>
-        <h2 className='text-4xl font-bold text-indigo-500 text-center mb-12'>Purchase Coin</h2>
+        <h2 className='text-4xl font-bold text-cyan-700 text-center mb-12'>Purchase Coin</h2>
       <div className='coin-cards grid grid-cols-1 lg:grid-cols-2 gap-10 '>
       {buyerCoinOptions.map((option, index) => (
-        <div key={index} className="card bg-indigo-50 px-5 md:px-14 py-5 md:py-10">
+        <div key={index} className="card bg-cyan-50 px-5 md:px-14 py-5 md:py-10 shadow-lg transition hover:scale-105">
           <h3 className='flex items-center gap-3 text-4xl font-semibold text-yellow-600 justify-center'><FaCoins></FaCoins> {option.coins} Coins</h3>
           <p className='text-3xl font-bold text-center my-5'>${option.price}</p>
-          <Link to={`/dashboard/payment/${option.coins}`}><button className='text-xl font-semibold btn mx-auto block bg-indigo-500 text-white'>Buy Now</button></Link>
+          <Link to={`/dashboard/payment/${option.coins}`}><button className='text-xl font-semibold btn mx-auto block bg-cyan-700 text-white'>Buy Now</button></Link>
         </div>
       ))}
       </div>

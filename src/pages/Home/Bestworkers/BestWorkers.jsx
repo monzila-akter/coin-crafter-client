@@ -15,7 +15,7 @@ const BestWorkers = () => {
   });
 
   if (isLoading) {
-    return <p className="text-center text-indigo-500 font-bold text-lg">Loading...</p>;
+    return <div className="w-full justify-center items-center"><p className="text-center text-cyan-800 font-bold text-lg">Loading...</p></div>;
   }
 
   if (error) {
@@ -28,7 +28,7 @@ const BestWorkers = () => {
 
   return (
     <div className="w-full container mx-auto px-5 md:px-10 lg:px-14 mb-10 md:mb-24">
-      <h2 className="text-4xl font-bold text-center text-indigo-600 mb-8">
+      <h2 className="text-4xl font-bold text-center text-cyan-800 mb-8">
         Best Workers
       </h2>
 
@@ -37,7 +37,7 @@ const BestWorkers = () => {
         {workers?.map((worker) => (
           <motion.div
             key={worker?.email}
-            className="bg-indigo-50 shadow-md rounded-lg p-6 flex flex-col items-center"
+            className="bg-cyan-50 shadow-md rounded-lg p-6 flex flex-col items-center"
             initial={{ opacity: 0, y: 20 }}  // Start with opacity 0 and slightly below
             animate={{ opacity: 1, y: 0 }}   // Animate to full opacity and original position
             transition={{ duration: 0.5, ease: "easeInOut" }} // Set animation duration
@@ -49,7 +49,7 @@ const BestWorkers = () => {
             />
             <h3 className="text-xl font-semibold mb-2">{worker.name}</h3>
             <p className="text-gray-600 mb-2">Email: {worker.email}</p>
-            <p className="text-indigo-500 font-bold">
+            <p className="text-cyan-800 font-bold">
               Coins: {worker.coins.toLocaleString()}
             </p>
           </motion.div>

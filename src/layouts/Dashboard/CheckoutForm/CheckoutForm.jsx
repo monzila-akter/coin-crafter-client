@@ -126,7 +126,7 @@ const CheckoutForm = ({ price, email, coins }) => {
                 }}
             />
             <button
-                className='btn bg-indigo-500 block mx-auto text-xl font-semibold text-white my-10'
+                className='btn bg-cyan-700 block mx-auto text-xl font-semibold text-white my-10'
                 type="submit"
                 disabled={!stripe || processing}
             >

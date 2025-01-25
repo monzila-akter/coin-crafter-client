@@ -39,12 +39,12 @@ const MySubmissions = () => {
             <Helmet>
                 <title>CoinCrafter | Dashboard | MySubmissions</title>
             </Helmet>
-            <h1 className="text-4xl font-bold mb-12 text-indigo-500 text-center">My Submissions</h1>
-            <div className=" rounded-xl bg-indigo-50 px-5 md:px-10 py-5 md:py-14">
+            <h1 className="text-4xl font-bold mb-12 text-cyan-700 text-center">My Submissions</h1>
+            <div className=" rounded-xl bg-cyan-50 px-5 md:px-10 py-5 md:py-14">
                 <div className="rounded-t-3xl overflow-x-auto">
                     <table className="table">
                         {/* Table Head */}
-                        <thead className="bg-indigo-500">
+                        <thead className="bg-cyan-700">
                             <tr className="text-lg text-white">
                                 <th>Sr</th>
                                 <th>Title</th>
@@ -86,7 +86,7 @@ const MySubmissions = () => {
                     <button
                         disabled={page === 1}
                         onClick={() => setPage(page - 1)}
-                        className="px-4 py-2 bg-gray-300 text-gray-700 rounded disabled:opacity-50"
+                        className="px-4 py-2 bg-cyan-700 text-white text-lg rounded disabled:opacity-50"
                     >
                         Previous
                     </button>
@@ -96,7 +96,7 @@ const MySubmissions = () => {
                     <button
                         disabled={page === totalPages}
                         onClick={() => setPage(page + 1)}
-                        className="px-4 py-2 bg-gray-300 text-gray-700 rounded disabled:opacity-50"
+                        className="px-4 py-2 bg-cyan-700 text-white text-lg rounded disabled:opacity-50"
                     >
                         Next
                     </button>

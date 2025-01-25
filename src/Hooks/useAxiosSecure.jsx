@@ -22,16 +22,16 @@ const useAxiosSecure = () => {
 
 //    interceptors 401 and 403 error status
 
-axiosSecure.interceptors.response.use(function(response) {
-    return response;
-}, async(error) => {
-    const status = error.response.status;
-    if(status === 400 || status === 401 || status === 403 ){
-        await logOut();
-        navigate("/login")
-    }
-    return Promise.reject(error);
-})
+// axiosSecure.interceptors.response.use(function(response) {
+//     return response;
+// }, async(error) => {
+//     const status = error.response.status;
+//     if(status === 400 || status === 401 || status === 403 ){
+//         await logOut();
+//         navigate("/login")
+//     }
+//     return Promise.reject(error);
+// })
 
     return axiosSecure;
 };

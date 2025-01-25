@@ -4,7 +4,7 @@ import lottieFiles from "../../../assets/lottiefiles/lottieAboutUs.json"
 
 const AboutUs = () => {
   return (
-    <section className="mb-10 md:mb-24 bg-indigo-50">
+    <section className="mb-10 md:mb-24 bg-cyan-50">
       <div className="container mx-auto py-10 px-5 md:px-10 lg:px-14 flex flex-col md:flex-row items-center gap-10 rounded-lg">
         {/* Left Side: Title and Description */}
         <motion.div
@@ -13,7 +13,7 @@ const AboutUs = () => {
           transition={{ duration: 0.8 }}
           className="md:w-1/2"
         >
-          <h2 className="text-4xl font-bold text-indigo-500 mb-5">About Us</h2>
+          <h2 className="text-4xl font-bold text-cyan-800 mb-5">About Us</h2>
           <p className="text-gray-600 leading-relaxed">
             Welcome to our platform, where task providers meet skilled
             professionals. Our mission is to create a seamless and secure

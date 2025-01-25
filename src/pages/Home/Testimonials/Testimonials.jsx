@@ -35,7 +35,7 @@ const Testimonials = () => {
     return (
         <section className="container mx-auto px-5 md:px-10 lg:px-14 mb-10 md:mb-24">
             <div className="text-center mb-12">
-                <h2 className="text-4xl font-bold text-indigo-500 mb-3">TESTIMONIALS</h2>
+                <h2 className="text-4xl font-bold text-cyan-800 mb-3">TESTIMONIALS</h2>
                 <p className="text-lg text-gray-500">Here's what some of our happy clients have to say!</p>
             </div>
 
@@ -47,12 +47,12 @@ const Testimonials = () => {
                 slidesPerView={1}
             >
                 {testimonials.map((testimonial, index) => (
-                    <SwiperSlide key={index} className="flex flex-col items-center text-center px-5 py-7 bg-indigo-50 rounded-lg shadow-lg">
+                    <SwiperSlide key={index} className="flex flex-col items-center text-center px-5 py-7 bg-cyan-50 rounded-lg shadow-lg">
                         <div className="flex justify-center mb-6 mt-4">
                             <img 
                                 src={testimonial.photo} 
                                 alt={`${testimonial.name} photo`} 
-                                className="w-24 h-24 object-cover rounded-full border-4 border-indigo-500"
+                                className="w-24 h-24 object-cover rounded-full border-4 border-cyan-800"
                             />
                         </div>
                        <div className="w-full flex justify-center">
@@ -61,7 +61,7 @@ const Testimonials = () => {
                         </p>
                        </div>
                         <p className="text-lg text-gray-700 mb-3">{testimonial.review}</p>
-                        <h3 className="text-2xl font-semibold text-indigo-500">{testimonial.name}</h3>
+                        <h3 className="text-2xl font-semibold text-cyan-800">{testimonial.name}</h3>
                         {/* Updated Rating */}
                         <div className="w-full flex justify-center mt-4 mb-4">
                             

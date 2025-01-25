@@ -4,15 +4,15 @@ import { NavLink } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-indigo-500 text-white py-14">
+    <footer className="bg-cyan-800 text-white py-14">
       <div className="container mx-auto px-5 md:px-10 flex flex-col md:flex-row items-center justify-between">
         {/* Left Section - Logo and Short Description */}
         <div className="flex flex-col items-start space-y-2">
           <NavLink
             to="/"
-            className="text-2xl font-bold tracking-wide text-white hover:text-yellow-400 transition"
+            className="text-2xl font-bold tracking-wide text-white hover:text-cyan-300 transition"
           >
-            <span className="text-yellow-400">COIN</span>CRAFTER
+            <span className="text-cyan-300">COIN</span>CRAFTER
           </NavLink>
           <p className="text-sm text-gray-200">
             CoinCrafter – Empowering developers with efficient collaboration tools and opportunities.
@@ -22,26 +22,26 @@ const Footer = () => {
         {/* Center Section - Social Media Icons */}
         <div className="flex md:order-3 space-x-4 mt-4 md:mt-0 md:justify-end">
           <a
-            href="https://www.facebook.com/your-profile"
+            href="https://www.facebook.com/monzila.akter2/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white text-2xl hover:text-yellow-400 transition"
+            className="text-white text-2xl hover:text-cyan-300 transition"
           >
             <FaFacebook />
           </a>
           <a
-            href="https://www.linkedin.com/in/your-profile"
+            href="https://www.linkedin.com/in/monzila-akter-1446291b4/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white text-2xl hover:text-yellow-400 transition"
+            className="text-white text-2xl hover:text-cyan-300 transition"
           >
             <FaLinkedin />
           </a>
           <a
-            href="https://github.com/your-profile"
+            href="https://github.com/monzila-akter"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white text-2xl hover:text-yellow-400 transition"
+            className="text-white text-2xl hover:text-cyan-300 transition"
           >
             <FaGithub />
           </a>

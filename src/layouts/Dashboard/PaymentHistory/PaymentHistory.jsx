@@ -23,13 +23,13 @@ const PaymentHistory = () => {
             <Helmet>
                 <title>CoinCrafter | Dashboard | PaymentHistory</title>
             </Helmet>
-           <h2 className='text-4xl font-bold text-indigo-500 text-center mb-12'>Payment History</h2>
-           <div className='bg-indigo-50 rounded-lg px-5 py-5 md:py-14 md:px-10'>
+           <h2 className='text-4xl font-bold text-cyan-700 text-center mb-12'>Payment History</h2>
+           <div className='bg-cyan-50 rounded-lg px-5 py-5 md:py-14 md:px-10'>
            <h2 className='text-3xl font-semibold mb-6'>Total Payments: {payments?.length}</h2>
            <div className="overflow-x-auto rounded-t-3xl">
                <table className="table">
                    {/* Table Head */}
-                   <thead className='bg-indigo-500'>
+                   <thead className='bg-cyan-700'>
                        <tr className='text-lg text-white'>
                            <th>Sr.</th>
                            <th>Email</th>

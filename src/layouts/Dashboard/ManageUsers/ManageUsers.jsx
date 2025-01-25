@@ -72,13 +72,13 @@ const ManageUsers = () => {
 
     return (
         <div className='w-full px-5 md:px-10 py-16 lg:px-14'>
-            <h2 className='text-4xl font-bold text-indigo-500 text-center mb-14'>Manage All Users</h2>
-            <div className='bg-indigo-50 rounded-lg px-5 py-5 md:py-14 md:px-10'>
+            <h2 className='text-4xl font-bold text-cyan-700 text-center mb-14'>Manage All Users</h2>
+            <div className='bg-cyan-50 rounded-lg px-5 py-5 md:py-14 md:px-10'>
                 <h2 className='text-3xl font-semibold mb-6'>Total Users: {users.length}</h2>
                 <div className="overflow-x-auto rounded-t-3xl">
                     <table className="table">
                         {/* Table Head */}
-                        <thead className='bg-indigo-500'>
+                        <thead className='bg-cyan-700'>
                             <tr className='text-lg text-white'>
                                 <th>Sr.</th>
                                 <th>Image</th>
@@ -97,14 +97,14 @@ const ManageUsers = () => {
                                     <td>{idx + 1}</td>
                                     <td>
                                         <img
-                                            className='w-12 h-12 rounded-2xl object-cover border-2 border-indigo-600'
+                                            className='w-12 h-12 rounded-2xl object-cover border-2 border-cyan-700'
                                             src={user.photo}
                                             alt={user.name}
                                         />
                                     </td>
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
-                                    <td>${user.coins}</td>
+                                    <td>{user.coins}</td>
                                     <td>{user.newRole}</td>
                                     {/* Update User Role */}
                                     <td className='flex items-center gap-2'>

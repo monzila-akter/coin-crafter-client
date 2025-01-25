@@ -25,7 +25,7 @@ const Payment = () => {
             <Helmet>
                 <title>CoinCrafter | Dashboard | Payment</title>
             </Helmet>
-            <h2 className='text-4xl font-bold text-indigo-500 text-center mb-12'>Payment</h2>
+            <h2 className='text-4xl font-bold text-cyan-700 text-center mb-12'>Payment</h2>
             <div className='flex mb-14 justify-center gap-14'>
                 <h3 className='text-2xl font-bold'>Coins: {coins}</h3>
                 <p className='text-2xl font-bold'>Price: ${price}</p>

@@ -7,19 +7,19 @@ const HowItWorks = () => {
       id: 1,
       title: "Sign Up",
       description: "Create an account and join our community effortlessly.",
-      icon: <FaUserPlus className="text-indigo-500 text-5xl" />,
+      icon: <FaUserPlus className="text-cyan-800 text-5xl" />,
     },
     {
       id: 2,
       title: "Explore Services",
       description: "Browse and find the perfect services tailored to your needs.",
-      icon: <FaSearch className="text-indigo-500 text-5xl" />,
+      icon: <FaSearch className="text-cyan-800 text-5xl" />,
     },
     {
       id: 3,
       title: "Get Results",
       description: "Receive top-quality results from verified professionals.",
-      icon: <FaCheckCircle className="text-indigo-500 text-5xl" />,
+      icon: <FaCheckCircle className="text-cyan-800 text-5xl" />,
     },
   ];
 
@@ -30,7 +30,7 @@ const HowItWorks = () => {
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-4xl font-bold text-indigo-500"
+          className="text-4xl font-bold text-cyan-800"
         >
           How It Works
         </motion.h2>
@@ -51,7 +51,7 @@ const HowItWorks = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: index * 0.2 }}
-            className=" p-8 rounded-lg shadow-md flex flex-col items-center text-center bg-indigo-50"
+            className=" p-8 rounded-lg shadow-md flex flex-col items-center text-center bg-cyan-50"
           >
             <div className="mb-5">{step.icon}</div>
             <h3 className="text-xl font-bold text-gray-800">{step.title}</h3>

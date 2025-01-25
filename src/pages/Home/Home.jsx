@@ -5,10 +5,14 @@ import HowItWorks from './HowItWorks/HowItWorks';
 import AboutUs from './AboutUs/AboutUs';
 import Features from './Features/Features';
 import BestWorkers from './Bestworkers/BestWorkers';
+import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
     return (
         <div>
+            <Helmet>
+                <title>CoinCrafter | Home</title>
+            </Helmet>
            <Hero></Hero>
            <BestWorkers></BestWorkers>
            <Testimonials></Testimonials>

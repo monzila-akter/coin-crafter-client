@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { Helmet } from "react-helmet-async";
 import { FaUsersGear } from "react-icons/fa6";
-import { FaCoins, FaUserShield } from "react-icons/fa";
+import { FaCoins, FaDollarSign, FaUserShield } from "react-icons/fa";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 
@@ -48,16 +48,16 @@ const AdminHome = () => {
             <Helmet>
                 <title>CoinCrafter | Dashboard | Home</title>
             </Helmet>
-            <h2 className="text-4xl font-bold text-indigo-500 text-center mb-10">STATES</h2>
+            <h2 className="text-4xl font-bold text-cyan-700 text-center mb-10">STATES</h2>
             {/* Admin Stats */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div className="p-5 flex justify-center items-center bg-indigo-100 rounded-lg shadow-lg space-x-6">
-                    <div className="text-3xl text-indigo-500">
+                <div className="p-5 flex justify-center items-center bg-cyan-100 rounded-lg shadow-lg space-x-6">
+                    <div className="text-3xl text-cyan-700">
                      <FaUsersGear></FaUsersGear>
                     </div>
                    <div className="">
-                   <h3 className="text-xl font-bold text-indigo-500">Total Workers</h3>
-                   <p className="text-2xl font-bold text-center text-indigo-500">{stats.totalWorkers}</p>
+                   <h3 className="text-xl font-bold text-cyan-700">Total Workers</h3>
+                   <p className="text-2xl font-bold text-center text-cyan-700">{stats.totalWorkers}</p>
                    </div>
                 </div>
 
@@ -81,7 +81,7 @@ const AdminHome = () => {
                 </div>
                 <div className="p-5 flex justify-center items-center bg-red-100 rounded-lg shadow-lg space-x-6">
                 <div className="text-3xl text-red-500">
-                     <FaCoins></FaCoins>
+                     <FaDollarSign></FaDollarSign>
                     </div>
                     <div>
                     <h3 className="text-xl font-bold text-red-500">Total Payments</h3>
@@ -92,12 +92,12 @@ const AdminHome = () => {
 
             {/* Withdrawal Requests Table */}
             <div className="">
-                <h2 className="text-4xl font-bold text-center text-indigo-500 my-10">Withdrawal Requests</h2>
+                <h2 className="text-4xl font-bold text-center text-cyan-700 my-10">Withdrawal Requests</h2>
                 <div className="bg-indigo-50 px-5 lg:px-14 py-10 rounded-lg">
                 <div className="overflow-x-auto rounded-t-3xl">
                     <table className="table">
                         <thead>
-                            <tr className="text-white text-lg font-medium bg-indigo-500">
+                            <tr className="text-white text-lg font-medium bg-cyan-700">
                                 <th className="p-3">Sr.</th>
                                 <th className="p-3">User Info</th>
                                 <th className="p-3">Amount</th>

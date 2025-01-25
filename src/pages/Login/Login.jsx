@@ -22,7 +22,7 @@ const Login = () => {
     const onSubmit = (data) => {
         signIn(data.email, data.password)
             .then(result => {
-                result.user,
+                if (result?.user && result.user !== '' && Object.keys(result.user).length) {
                     axiosSecurePublic.get(`/user/${result?.user?.email}`)
                         .then(res => {
                             const userInfo = res.data;
@@ -34,6 +34,7 @@ const Login = () => {
                             navigate(userInfo.newRole === 'Admin' ? '/dashboard/adminHome' : userInfo.newRole === 'Buyer' ? '/dashboard/buyerHome' : '/dashboard/workerHome');
                             reset();
                         })
+                }
 
             })
             .catch(error => {
@@ -48,55 +49,57 @@ const Login = () => {
     const handleGoogleLogin = () => {
         googleSignIn()
             .then(result => {
-                const userInfo = {
-                    email: result.user?.email,
-                    name: result.user?.displayName,
-                    photo: result.user?.photoURL,
-                    role: "Worker",
-                    registerType: 'google',
-                };
-
-                // No need to send coins, the backend will handle coin assignment based on the role
-                axiosSecurePublic.post("/register", userInfo)
-                    .then(res => {
-
-                        if (res.data.insertedId) {
-                            Swal.fire({
-                                title: "Successfully Logged In!",
-                                icon: "success",
-                                draggable: true,
-                            });
-                        }
-                        axiosSecurePublic.get(`/user/${result.user?.email}`)
+                if (result?.user && result.user !== '' && Object.keys(result.user).length) {
+                    const userInfo = {
+                        email: result.user?.email,
+                        name: result.user?.displayName,
+                        photo: result.user?.photoURL,
+                        role: "Worker",
+                        registerType: 'google',
+                    };
+    
+                    // No need to send coins, the backend will handle coin assignment based on the role
+                    axiosSecurePublic.post("/register", userInfo)
                         .then(res => {
-                            const userInfo = res.data;
-                            navigate(
-                                userInfo.newRole === 'Admin'
-                                    ? '/dashboard/adminHome'
-                                    : userInfo.newRole === 'Buyer'
-                                        ? '/dashboard/buyerHome'
-                                        : '/dashboard/workerHome'
-                            );
+    
+                            if (res.data.insertedId) {
+                                Swal.fire({
+                                    title: "Successfully Logged In!",
+                                    icon: "success",
+                                    draggable: true,
+                                });
+                            }
+                            axiosSecurePublic.get(`/user/${result.user?.email}`)
+                                .then(res => {
+                                    const userInfo = res.data;
+                                    navigate(
+                                        userInfo.newRole === 'Admin'
+                                            ? '/dashboard/adminHome'
+                                            : userInfo.newRole === 'Buyer'
+                                                ? '/dashboard/buyerHome'
+                                                : '/dashboard/workerHome'
+                                    );
+                                });
+                        })
+                        .catch(err => {
+                            // Handle error if the user already exists
+                            if (err.response && err.response.status === 400) {
+                                Swal.fire({
+                                    title: "User already exists",
+                                    text: "This email is already registered.",
+                                    icon: "error",
+                                    draggable: true,
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: "Error",
+                                    text: "An unexpected error occurred. Please try again.",
+                                    icon: "error",
+                                    draggable: true,
+                                });
+                            }
                         });
-                    })
-                    .catch(err => {
-                        // Handle error if the user already exists
-                        if (err.response && err.response.status === 400) {
-                            Swal.fire({
-                                title: "User already exists",
-                                text: "This email is already registered.",
-                                icon: "error",
-                                draggable: true,
-                            });
-                        } else {
-                            Swal.fire({
-                                title: "Error",
-                                text: "An unexpected error occurred. Please try again.",
-                                icon: "error",
-                                draggable: true,
-                            });
-                        }
-                    });
+                }
             })
             .catch(error => {
                 console.error("Google sign-in error:", error);
@@ -110,12 +113,12 @@ const Login = () => {
             </Helmet>
             <div className='container mx-auto w-full flex flex-col md:flex-row gap-y-10 md:gap-y-0 space-x-0 md:space-x-6 lg:space-x-0 items-center justify-between px-6 md:px-10 lg:px-14 py-16'>
                 {/* form part */}
-                <div className='w-full md:w-1/2 bg-indigo-50 px-5 py-10 order-2 md:order-1 rounded-lg'>
+                <div className='w-full md:w-1/2 bg-cyan-50 px-5 py-10 order-2 md:order-1 rounded-lg'>
                     {/* Main content */}
                     <div>
                         {/* Form part */}
                         <div>
-                            <h2 className='text-4xl font-bold text-center text-indigo-500 mb-6'>Log In</h2>
+                            <h2 className='text-4xl font-bold text-center text-cyan-700 mb-6'>Log In</h2>
                             <form onSubmit={handleSubmit(onSubmit)}>
                                 {/* Email field */}
                                 <div className="form-control">
@@ -137,18 +140,18 @@ const Login = () => {
                                     )}
                                 </div>
 
-                                <button type='submit' className='btn w-full text-xl font-bold text-white bg-indigo-500 mt-5 mb-5'>Login</button>
+                                <button type='submit' className='btn w-full text-xl font-bold text-white bg-cyan-700 mt-5 mb-5'>Login</button>
 
                                 <Link to="">
                                     <p className='text-base font-medium text-yellow-500 text-center mb-5'>
-                                        Don't Have An Account? Go to <Link className='text-indigo-500' to="/register">Register</Link>
+                                        Don't Have An Account? Go to <Link className='text-cyan-700' to="/register">Register</Link>
                                     </p>
                                 </Link>
                             </form>
 
                             <p className='text-xl font-medium text-center text-[#444444]mb-4'>Or sign In with</p>
                             <div className='flex space-x-14 items-center justify-center mt-4'>
-                                <button onClick={handleGoogleLogin} className='btn bg-transparent border-2 border-indigo-500 text-indigo-500 text-xl font-bold w-full'>
+                                <button onClick={handleGoogleLogin} className='btn bg-transparent border-2 border-cyan-700 text-cyan-700 text-xl font-bold w-full'>
                                     <FaGoogle /> Google
                                 </button>
                             </div>

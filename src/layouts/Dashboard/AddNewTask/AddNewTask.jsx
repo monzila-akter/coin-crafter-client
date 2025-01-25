@@ -8,6 +8,7 @@ import { AuthContext } from "../../../provider/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
+import useUsers from "../../../Hooks/useUsers";
 
 const image_hosting_key = import.meta.env.VITE_Image_Hosting_Key;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -18,14 +19,7 @@ const AddNewTask = () => {
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
-
-  const { data: userData, refetch } = useQuery({
-    queryKey: ["user-email", user?.email],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/user/${user.email}`);
-      return res.data;
-    },
-  });
+  const {userInfo, refetch} = useUsers();
 
   const onSubmit = async (data) => {
     if (!user || !user.email) {
@@ -44,7 +38,7 @@ const AddNewTask = () => {
     // Recalculate total payable using converted values
     const totalPayable = requiredWorkers * payableAmount;
 
-    if (!userData || !userData.coins || totalPayable > userData.coins) {
+    if (!userInfo || !userInfo.coins || totalPayable > userInfo.coins) {
       Swal.fire({
         icon: "error",
         title: "Insufficient Coins",
@@ -96,10 +90,10 @@ const AddNewTask = () => {
         <Helmet>
             <title>CoinCrafter | Dashboard | AddNewTask</title>
         </Helmet>
-      <h2 className="text-4xl font-bold text-indigo-500 text-center mb-10">
+      <h2 className="text-4xl font-bold text-cyan-700 text-center mb-10">
         Add New Task
       </h2>
-      <div className="bg-indigo-50 px-5 lg:px-10 py-10 md:py-14 mx-6 md:mx-14 lg:mx-24 mb-24 rounded-lg">
+      <div className="bg-cyan-50 px-5 lg:px-10 py-10 md:py-14 mx-6 md:mx-14 lg:mx-24 mb-24 rounded-lg">
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* Task Title */}
           <label className="form-control mb-6">
@@ -184,7 +178,7 @@ const AddNewTask = () => {
             <input
               {...register("task_image")}
               type="file"
-              className="file-input w-full max-w-xs"
+              className="file-input w-full "
               required
             />
           </div>
@@ -192,7 +186,7 @@ const AddNewTask = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="btn w-full text-xl font-bold text-white bg-indigo-500 "
+            className="btn w-full text-xl font-bold text-white bg-cyan-700 "
           >
             Add Task <FaTasks className="ml-2" />
           </button>

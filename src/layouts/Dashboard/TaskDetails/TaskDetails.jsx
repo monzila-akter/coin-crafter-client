@@ -66,9 +66,9 @@ const TaskDetails = () => {
         <Helmet>
             <title>CoinCrafter | Dashboard | TaskDetails</title>
         </Helmet>
-        <h2 className="text-4xl font-bold text-indigo-500 text-center mb-10">Task Details</h2>
-        <div className="bg-indigo-50 py-10 px-5 md:px-10 lg:px-14 rounded-lg">
-      <h1 className="text-2xl text-indigo-500 font-bold mb-4">{task.task_title}</h1>
+        <h2 className="text-4xl font-bold text-cyan-700 text-center mb-10">Task Details</h2>
+        <div className="bg-cyan-50 py-10 px-5 md:px-10 lg:px-14 rounded-lg">
+      <h1 className="text-2xl text-cyan-700 font-bold mb-4">{task.task_title}</h1>
       <img className="w-full h-[200px] md:h-[300px] lg:h-[400px] object-cover mb-6 rounded-lg" src={task.task_image_url} alt="" />
       <p className="mb-2">
         <strong>Details:</strong> {task.task_detail}
@@ -94,7 +94,7 @@ const TaskDetails = () => {
 
         <button
           type="submit"
-          className="mt-4 w-full bg-indigo-500 text-white text-lg font-semibold btn"
+          className="mt-4 w-full bg-cyan-700 text-white text-lg font-semibold btn"
         >
           Submit
         </button>

@@ -3,6 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 import { AuthContext } from '../../../provider/AuthProvider';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { Helmet } from 'react-helmet-async';
+import toast from 'react-hot-toast';
+import Swal from 'sweetalert2';
 
 const Withdrawal = () => {
   const { user } = useContext(AuthContext); // Authenticated user from the AuthProvider
@@ -26,7 +28,7 @@ const Withdrawal = () => {
     if (!userData) return;
 
     if (Number(withdrawCoins) > userData.coins) {
-      alert('Insufficient coin balance');
+      toast.error('Insufficient coin balance');
       return;
     }
 
@@ -40,10 +42,15 @@ const Withdrawal = () => {
         account_number: accountNumber,
       });
 
-      alert(response.data.message);
+      Swal.fire({
+        title: (response.data.message),
+        icon: "success",
+        draggable: true
+      });
+
     } catch (error) {
       console.error('Withdrawal failed', error.response.data.message);
-      alert(error.response.data.message);
+      toast.error(error.response.data.message);
     }
   };
 
@@ -55,9 +62,9 @@ const Withdrawal = () => {
         <Helmet>
             <title>CoinCrafter | Dashboard | Withdrawal</title>
         </Helmet>
-      <h2 className="text-4xl font-bold mb-12 text-center text-indigo-500">Withdrawal Form</h2>
+      <h2 className="text-4xl font-bold mb-12 text-center text-cyan-700">Withdrawal Form</h2>
 
-  <div className='bg-indigo-50 px-5 md:px-10 lg:px-14 py-14 rounded-xl'>
+  <div className='bg-cyan-50 px-5 md:px-10 lg:px-14 py-14 rounded-xl'>
   <div className="mb-6">
         <p className="text-gray-700 mb-2 text-xl font-semibold">Total Coins: <strong>{userData.coins}</strong></p>
         <p className="text-gray-700 mb-2 text-xl font-semibold">
@@ -115,7 +122,7 @@ const Withdrawal = () => {
         {userData.coins >= 200 && Number(withdrawCoins) >= 200 ? (
           <button
             type="submit"
-            className="w-full bg-indigo-500 text-lg font-semibold text-white font-medium btn hover:bg-indigo-700"
+            className="w-full bg-cyan-700 text-lg font-semibold text-white btn hover:bg-cyan-800"
           >
             Withdraw
           </button>
