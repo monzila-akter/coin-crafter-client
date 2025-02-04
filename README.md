@@ -1,6 +1,6 @@
 ## CoinCrafter - Micro-Task and Earning Platform
 
-
+![CoinCrafter Screenshot](https://github.com/monzila-akter/coin-crafter-client/blob/main/src/assets/lottiefiles/coin-crafter.PNG)
 
 ## 🚀 Project Overview
 CoinCrafter is a Micro-Task and Earning Platform where users can complete small tasks to earn coins, which can be withdrawn as real money. The platform supports three user roles: Worker, Buyer, and Admin, each with distinct functionalities.
