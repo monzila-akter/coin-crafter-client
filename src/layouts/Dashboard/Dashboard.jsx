@@ -36,7 +36,7 @@ const Dashboard = () => {
   }
 
   return (
-    <div>
+    <div className='relative'>
       <Helmet>
         <title>CoinCrafter | Dashboard</title>
       </Helmet>
@@ -44,7 +44,7 @@ const Dashboard = () => {
       <Navbar />
       {/* Hamburger menu for small and medium screens */}
       <button
-        className="lg:hidden absolute text-white top-6 left-5 z-50 text-2xl"
+        className="lg:hidden absolute  text-white top-6 left-5 z-50 text-2xl"
         onClick={toggleSidebar}
       >
         {isSidebarOpen ? <FaTimes ></FaTimes> : <FaBars></FaBars>}

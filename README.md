@@ -1,37 +1,104 @@
-# Coin Crafter
+## CoinCrafter - Micro-Task and Earning Platform
+(Add a clean screenshot here)
 
-Coin Crafter is a Micro-Task and Earning Platform where users can earn coins by completing tasks. The platform includes features for workers, buyers, and admins to manage tasks, payments, and withdrawals effectively.
+## 🚀 Project Overview
+CoinCrafter is a Micro-Task and Earning Platform where users can complete small tasks to earn coins, which can be withdrawn as real money. The platform supports three user roles: Worker, Buyer, and Admin, each with distinct functionalities.
 
-## Live Site URL:
+Workers complete tasks to earn rewards.
+Buyers create and manage tasks while paying workers for their work.
+Admins oversee user activities, manage withdrawals, and maintain system integrity.
+## 🛠️ Tech Stack
+- Frontend: React.js, Tailwind CSS, Swiper Slider, React Router
+- Backend: Node.js, Express.js, MongoDB
+- Authentication: Firebase Authentication, JWT (JSON Web Token)
+- Payments: Stripe Payment Integration
+- Hosting: Firebase (Client-side), Vercel (Server-side)
+- Other: ImageBB API (for image uploads)
+## 🌟 Core Features
+✅ Role-Based Dashboard: Separate dashboards for Workers, Buyers, and Admins.
+✅ User Authentication: Email/password login and Google sign-in.
+✅ Task Management: Buyers can create, update, and delete tasks. Workers can submit tasks and earn rewards.
+✅ Coin System: Workers earn coins that can be withdrawn; Buyers purchase coins to pay workers.
+✅ Payment Integration: Secure Stripe-based payment system for purchasing coins.
+✅ Withdrawal System: Workers can withdraw earnings once they reach 200 coins.
+✅ Real-time Notifications: Users receive notifications for important events.
+✅ Secure Authorization: Role-based access with JWT authentication.
+✅ Pagination & Responsive UI: Seamless experience across all devices.
 
-- Front-end Live Site Link: https://coin-crafter-client.web.app/
+## 📦 Dependencies
+# Below are the key dependencies used in the project:
 
-## Admin Credentials:
-- **Username:** admin45@gmail.com
-- **Password:** Admin45#
+1. Client-Side (Frontend)
+- React.js
+- React Router DOM
+- Firebase Authentication
+- Swiper.js (for sliders)
+- React-Responsive-Carousel
+- Tailwind CSS
+2. Server-Side (Backend)
+- Node.js
+- Express.js
+- MongoDB (Mongoose)
+- JWT (JSON Web Token)
+- Stripe API (for payments)
+- ImageBB API (for image uploads)
+## 🏗️ Installation & Setup
+# Follow these steps to set up the project locally:
 
-## Github Links: 
+# 1️⃣ Clone the Repositories
+- bash
+- Copy
+- Edit
+- git clone <CLIENT_REPO_URL>
+- git clone <SERVER_REPO_URL>
+# 2️⃣ Install Dependencies
+- Navigate into both the client and server directories and install dependencies:
 
-- Client Side Github Repository Link: https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-monzila-akter
+- bash
+- Copy
+- Edit
+# For client-side
+- cd client
+- npm install
 
-- Server Side Github Repository Link: https://github.com/Programming-Hero-Web-Course4/b10a12-server-side-monzila-akter
+# For server-side
+- cd server
+- npm install
+# 3️⃣ Set Up Environment Variables
+* Create a .env file in the server directory and add the following:
 
-## Features:
-- User roles: Worker, Buyer, and Admin
-- Coin-based payment system for tasks
-- Stripe integration for seamless payments
-- Task management system for posting, reviewing, and completing tasks
-- User authentication and registration
-- Real-time notifications for submission status changes, approvals, and rejections
-- Admin can approve/reject task submissions and withdrawal requests
-- Workers can submit tasks and earn coins upon approval
-- Responsive design optimized for both desktop and mobile
-- Secure payment system with Stripe for buying and withdrawing coins
+- env
+- Copy
+- Edit
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
+STRIPE_SECRET_KEY=your_stripe_secret_key
+For the client, set up Firebase credentials in an .env file:
 
+env
+Copy
+Edit
+REACT_APP_FIREBASE_API_KEY=your_firebase_api_key
+REACT_APP_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+# 4️⃣ Run the Server & Client
+- bash
+- Copy
+- Edit
+# Start the backend server
+- cd server
+- npm run dev  
 
-## Conclusion
-Coin Crafter is a complete solution for micro-task management and coin-based transactions, with a robust notification system, secure payment options, and a user-friendly interface.
-For any issues or suggestions, feel free to open an issue on GitHub.
+# Start the frontend client
+- cd client
+- npm start  
+## 🔗 Live Links & Resources
+1. Frontend Live Site: https://coin-crafter-client.web.app/
+2. Client GitHub Repo: https://github.com/monzila-akter/trust-ease-client
+3. Server GitHub Repo: https://github.com/monzila-akter/coin-crafter-server
+4. Admin Login Credentials:
+- Email: admin45@gmail.com
+- Password: Admin45#
+
 
 
 

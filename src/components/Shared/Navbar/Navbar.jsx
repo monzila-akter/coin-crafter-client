@@ -72,7 +72,7 @@ const Navbar = () => {
 
 
   return (
-    <nav className=" bg-cyan-800 text-white">
+    <nav className=" bg-cyan-800 text-white z-100">
       <div className="container mx-auto px-5 py-5 flex justify-between items-center">
         {/* Left Section - Logo */}
 
@@ -310,7 +310,7 @@ const Navbar = () => {
         ) : (
           <>
             <Link
-              onClick={() => navigate(getDashboardHomeRoute)}
+             onClick={() => navigate(getDashboardHomeRoute())}
               className="block text-lg font-medium text-white hover:text-white"
             >
               Dashboard

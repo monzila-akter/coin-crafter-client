@@ -1,6 +1,7 @@
 import React from "react";
 import { FaFacebook, FaLinkedin, FaGithub } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 
 const Footer = () => {
   return (
@@ -8,12 +9,12 @@ const Footer = () => {
       <div className="container mx-auto px-5 md:px-10 flex flex-col md:flex-row items-center justify-between">
         {/* Left Section - Logo and Short Description */}
         <div className="flex flex-col items-start space-y-2">
-          <NavLink
+          <Link
             to="/"
             className="text-2xl font-bold tracking-wide text-white hover:text-cyan-300 transition"
           >
             <span className="text-cyan-300">COIN</span>CRAFTER
-          </NavLink>
+          </Link>
           <p className="text-sm text-gray-200">
             CoinCrafter – Empowering developers with efficient collaboration tools and opportunities.
           </p>
