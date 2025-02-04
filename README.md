@@ -1,5 +1,6 @@
 ## CoinCrafter - Micro-Task and Earning Platform
-(Add a clean screenshot here)
+
+
 
 ## 🚀 Project Overview
 CoinCrafter is a Micro-Task and Earning Platform where users can complete small tasks to earn coins, which can be withdrawn as real money. The platform supports three user roles: Worker, Buyer, and Admin, each with distinct functionalities.
@@ -26,7 +27,7 @@ Admins oversee user activities, manage withdrawals, and maintain system integrit
 ✅ Pagination & Responsive UI: Seamless experience across all devices.
 
 ## 📦 Dependencies
-# Below are the key dependencies used in the project:
+### Below are the key dependencies used in the project:
 
 1. Client-Side (Frontend)
 - React.js
@@ -43,28 +44,28 @@ Admins oversee user activities, manage withdrawals, and maintain system integrit
 - Stripe API (for payments)
 - ImageBB API (for image uploads)
 ## 🏗️ Installation & Setup
-# Follow these steps to set up the project locally:
+### Follow these steps to set up the project locally:
 
-# 1️⃣ Clone the Repositories
+### 1️⃣ Clone the Repositories
 - bash
 - Copy
 - Edit
 - git clone <CLIENT_REPO_URL>
 - git clone <SERVER_REPO_URL>
-# 2️⃣ Install Dependencies
+### 2️⃣ Install Dependencies
 - Navigate into both the client and server directories and install dependencies:
 
 - bash
 - Copy
 - Edit
-# For client-side
+#### For client-side
 - cd client
 - npm install
 
-# For server-side
+#### For server-side
 - cd server
 - npm install
-# 3️⃣ Set Up Environment Variables
+### 3️⃣ Set Up Environment Variables
 * Create a .env file in the server directory and add the following:
 
 - env
@@ -80,15 +81,15 @@ Copy
 Edit
 REACT_APP_FIREBASE_API_KEY=your_firebase_api_key
 REACT_APP_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
-# 4️⃣ Run the Server & Client
+### 4️⃣ Run the Server & Client
 - bash
 - Copy
 - Edit
-# Start the backend server
+#### Start the backend server
 - cd server
 - npm run dev  
 
-# Start the frontend client
+#### Start the frontend client
 - cd client
 - npm start  
 ## 🔗 Live Links & Resources
