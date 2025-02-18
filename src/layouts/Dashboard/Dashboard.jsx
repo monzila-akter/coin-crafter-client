@@ -50,7 +50,7 @@ const Dashboard = () => {
         {isSidebarOpen ? <FaTimes ></FaTimes> : <FaBars></FaBars>}
       </button>
 
-      <div className="w-full flex min-h-screen">
+      <div className="w-full flex min-h-screen  lg:mt-24">
         {/* Sidebar */}
         <div
           className={`fixed top-0 left-0 z-40 min-h-screen w-72 bg-cyan-200 px-5 py-12 transition-transform duration-300 ease-in-out transform ${
@@ -152,7 +152,7 @@ const Dashboard = () => {
 
         {/* Main content */}
         <div
-          className="w-full overflow-x-hidden flex flex-col justify-center transition-all duration-300"
+          className="w-full overflow-x-hidden flex flex-col justify-center transition-all duration-300 mt-10"
           onClick={() => isSidebarOpen && setIsSidebarOpen(false)} // Close sidebar when clicking outside
         >
          

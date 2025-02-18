@@ -22,6 +22,9 @@ import AdminHome from '../layouts/Dashboard/AdminHome/AdminHome';
 import AdminRoute from './AdminRoute';
 import ManageTasks from '../layouts/Dashboard/ManageTasks/ManageTasks';
 import ErrorPage from '../pages/ErrorPage/ErrorPage';
+import Services from '../pages/Services/Services';
+import Tasks from '../pages/Tasks/Tasks';
+import Payments from '../pages/Payments/Payments';
 
 const router = createBrowserRouter([
     {
@@ -32,6 +35,18 @@ const router = createBrowserRouter([
         {
             path: "/",
             element: <Home></Home>
+        },
+        {
+          path: "/services",
+          element: <Services></Services>
+        },
+        {
+          path: "/tasks",
+          element: <PrivateRoute><Tasks></Tasks></PrivateRoute>
+        },
+        {
+          path: "/payments",
+          element: <PrivateRoute><Payments></Payments></PrivateRoute>
         },
         {
             path: "/register",

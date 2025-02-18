@@ -18,9 +18,7 @@ const Navbar = () => {
   const [notifications, setNotifications] = useState([]);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const popupRef = useRef(null);
- 
-  const {userInfo, refetch} = useUsers();
-
+  const { userInfo, refetch } = useUsers();
 
   // Function to determine the dashboard home route
   const getDashboardHomeRoute = () => {
@@ -41,12 +39,12 @@ const Navbar = () => {
     const response = await axiosSecure.get(`/notification/${user?.email}`);
 
     setNotifications(response.data);
-  }
+  };
 
   // Handle notification click (toggle popup visibility)
   const toggleNotificationPopup = () => {
     setIsNotificationOpen(!isNotificationOpen);
-    
+
     if (!isNotificationOpen) {
       getNotifications();
     } else {
@@ -54,10 +52,13 @@ const Navbar = () => {
     }
   };
 
-
   // Close popup when clicking outside
   const handleClickOutside = (event) => {
-    if (popupRef.current && !popupRef.current.contains(event.target) && !event.target.closest(".notification-icon")) {
+    if (
+      popupRef.current &&
+      !popupRef.current.contains(event.target) &&
+      !event.target.closest(".notification-icon")
+    ) {
       setIsNotificationOpen(false);
     }
   };
@@ -70,12 +71,10 @@ const Navbar = () => {
     };
   }, []);
 
-
   return (
-    <nav className=" bg-cyan-800 text-white z-100">
+    <nav className="fixed top-0 left-0 w-full bg-cyan-800 text-white z-50">
       <div className="container mx-auto px-5 py-5 flex justify-between items-center">
         {/* Left Section - Logo */}
-
         <div className="flex items-center">
           <Link
             to="/"
@@ -103,21 +102,38 @@ const Navbar = () => {
           </div>
         ) : (
           <div className="hidden lg:flex items-center space-x-6 justify-center flex-grow">
-            <Link
+            <NavLink to="/">
+              Home
+            </NavLink>
+            <NavLink
               onClick={() => navigate(getDashboardHomeRoute())}
-              className="text-lg font-medium text-white hover:text-white"
+              className=" text-white hover:text-white"
             >
               Dashboard
-            </Link>
+            </NavLink>
+            <NavLink to="/services">
+              Services
+            </NavLink>
             {/* Available Coins */}
-            {
-              user ? <div className="text-lg font-medium btn bg-white border-none flex items-center">
+            {user ? (
+              <>
+              
+              <NavLink to="/tasks">
+                Tasks
+              </NavLink>
+              <NavLink to="/payments">
+                Payments
+              </NavLink>
+              <div className="text-lg font-medium btn bg-white border-none flex items-center">
                 <img className="w-8" src={coinIcon} alt="Coin Icon" />
                 <span className="text-2xl font-semibold">
                   {userInfo?.coins || 0}
                 </span>
-              </div> : ""
-            }
+              </div>
+              </>
+            ) : (
+              ""
+            )}
           </div>
         )}
 
@@ -125,17 +141,19 @@ const Navbar = () => {
         <div className="hidden lg:flex items-center space-x-4">
           {isDashboard ? (
             <>
-
               {/* User Profile */}
               <div className="flex items-center">
                 {user ? (
-                  <div className="flex flex-col justify-center items-center"><img
-                    title={user?.displayName}
-                    className="w-10 object-cover h-10 border-2 border-cyan-300 rounded-full"
-                    src={user?.photoURL}
-                    alt="User"
-                  />
-                    <p className="text-lg font-medium text-white">{user?.displayName}</p>
+                  <div className="flex flex-col justify-center items-center">
+                    <img
+                      title={user?.displayName}
+                      className="w-10 object-cover h-10 border-2 border-cyan-300 rounded-full"
+                      src={user?.photoURL}
+                      alt="User"
+                    />
+                    <p className="text-lg font-medium text-white">
+                      {user?.displayName}
+                    </p>
                   </div>
                 ) : (
                   <FaUserCircle className="text-4xl text-white" />
@@ -158,9 +176,12 @@ const Navbar = () => {
                     {notifications.length > 0 ? (
                       notifications.map((notification, index) => (
                         <div key={index} className="border-b py-2">
-                          <Link to={notification.actionRoute}><p
-                           className="font-medium">{notification.message}</p></Link>
-                          <p className="text-sm text-gray-500">{new Date(notification.time).toLocaleString()}</p>
+                          <Link to={notification.actionRoute}>
+                            <p className="font-medium">{notification.message}</p>
+                          </Link>
+                          <p className="text-sm text-gray-500">
+                            {new Date(notification.time).toLocaleString()}
+                          </p>
                         </div>
                       ))
                     ) : (
@@ -250,7 +271,6 @@ const Navbar = () => {
         className={`${menuOpen ? "block" : "hidden"
           } lg:hidden bg-cyan-800 text-white space-y-2 p-4`}
       >
-       
         {isDashboard ? (
           <>
             <div className="block text-lg flex space-x-2 items-center bg-white py-2 px-3 w-[120px] rounded-lg text-black font-medium">
@@ -260,7 +280,9 @@ const Navbar = () => {
               </span>
             </div>
             <div className="block text-xl font-medium">
-              <span className="font-semibold btn bg-cyan-300 border-none text-white text-xl"><FaUserTie></FaUserTie> {userInfo?.newRole || "User"}</span>
+              <span className="font-semibold btn bg-cyan-300 border-none text-white text-xl">
+                <FaUserTie /> {userInfo?.newRole || "User"}
+              </span>
             </div>
 
             <NavLink className="block flex items-center space-x-2 text-lg text-white hover:text-white">
@@ -272,9 +294,10 @@ const Navbar = () => {
                     src={user?.photoURL}
                     alt="User"
                   />
-                  <p className="text-lg font-medium text-white">{user?.displayName}</p>
+                  <p className="text-lg font-medium text-white">
+                    {user?.displayName}
+                  </p>
                 </div>
-
               ) : (
                 <FaUserCircle className="text-4xl text-white" />
               )}
@@ -297,7 +320,9 @@ const Navbar = () => {
                     notifications.map((notification, index) => (
                       <div key={index} className="border-b py-2">
                         <p className="font-medium">{notification.message}</p>
-                        <p className="text-sm text-gray-500">{new Date(notification.time).toLocaleString()}</p>
+                        <p className="text-sm text-gray-500">
+                          {new Date(notification.time).toLocaleString()}
+                        </p>
                       </div>
                     ))
                   ) : (
@@ -309,20 +334,36 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <Link
-             onClick={() => navigate(getDashboardHomeRoute())}
-              className="block text-lg font-medium text-white hover:text-white"
+            <NavLink to="/" className="block text-white hover:text-white">
+              Home
+            </NavLink>
+            <NavLink
+              onClick={() => navigate(getDashboardHomeRoute())}
+              className="block  text-white hover:text-white"
             >
               Dashboard
-            </Link>
-            {
-              user ? <div className="block text-lg flex space-x-2 items-center bg-white py-2 px-3 w-[120px] rounded-lg text-black font-medium">
+            </NavLink>
+            <NavLink to="/services" className="block text-white hover:text-white">
+              Services
+            </NavLink>
+            {user ? (
+              <>
+              <NavLink to="/tasks" className="block text-white hover:text-white">
+              Tasks
+            </NavLink>
+            <NavLink to="/payments" className="block text-white hover:text-white">
+             Payments
+            </NavLink>
+              <div className="block text-lg flex space-x-2 items-center bg-white py-2 px-3 w-[120px] rounded-lg text-black font-medium">
                 <img className="w-8" src={coinIcon} alt="Coin Icon" />
                 <span className="text-2xl font-semibold">
                   {userInfo?.coins || 0}
                 </span>
-              </div> : ""
-            }
+              </div>
+              </>
+            ) : (
+              ""
+            )}
             <NavLink className="block flex items-center space-x-2 text-lg text-white hover:text-white">
               {user ? (
                 <img
@@ -370,7 +411,6 @@ const Navbar = () => {
             </a>
           </>
         )}
-
       </div>
     </nav>
   );
