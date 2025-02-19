@@ -98,7 +98,7 @@ const Register = () => {
     <Helmet>
       <title>CoinCrafter | Register</title>
     </Helmet>
-      <div className="container mx-auto flex flex-col md:flex-row items-center space-x-0 md:space-x-6 lg:space-x-10 w-full px-6 md:px-10 lg:px-14 py-16">
+      <div className="container mx-auto flex flex-col md:flex-row items-center space-x-0 md:space-x-6 lg:space-x-10 w-full px-6 md:px-10 lg:px-14 py-16 mt-24">
         {/* form part */}
         <div className=" w-full md:w-1/2 bg-cyan-50 px-5 md:px-6 lg:px-10 py-10 rounded-lg order-2 md:order-1">
         <div>

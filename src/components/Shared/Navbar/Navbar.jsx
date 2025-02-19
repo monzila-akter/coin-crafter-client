@@ -7,6 +7,7 @@ import { AuthContext } from "../../../provider/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useUsers from "../../../Hooks/useUsers";
+import ThemeToggle from "../../ThemeToggle";
 
 
 const Navbar = () => {
@@ -83,7 +84,7 @@ const Navbar = () => {
             <span className="text-cyan-300">COIN</span>CRAFTER
           </Link>
         </div>
-
+        <ThemeToggle></ThemeToggle>
         {/* Center Section - Dashboard Navbar */}
         {isDashboard ? (
           <div className="hidden lg:flex items-center space-x-6 justify-center flex-grow">
@@ -461,7 +462,9 @@ const Navbar = () => {
             </a>
           </>
         )}
+        
       </div>
+      
     </nav>
   );
 };

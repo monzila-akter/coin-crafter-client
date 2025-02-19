@@ -111,7 +111,7 @@ const Login = () => {
             <Helmet>
                 <title>CoinCrafter | Login</title>
             </Helmet>
-            <div className='container mx-auto w-full flex flex-col md:flex-row gap-y-10 md:gap-y-0 space-x-0 md:space-x-6 lg:space-x-0 items-center justify-between px-6 md:px-10 lg:px-14 py-16'>
+            <div className='container mx-auto w-full flex flex-col md:flex-row gap-y-10 md:gap-y-0 space-x-0 md:space-x-6 lg:space-x-0 items-center justify-between px-6 md:px-10 lg:px-14 py-16 mt-24'>
                 {/* form part */}
                 <div className='w-full md:w-1/2 bg-cyan-50 px-5 py-10 order-2 md:order-1 rounded-lg'>
                     {/* Main content */}
