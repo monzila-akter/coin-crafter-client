@@ -62,7 +62,7 @@ const TaskDetails = () => {
   if (error) return <div>Error loading task details!</div>;
 
   return (
-    <div className="w-full py-14 px-5 md:px-14 ">
+    <div className="w-full py-14 px-5 md:px-14  ">
         <Helmet>
             <title>CoinCrafter | Dashboard | TaskDetails</title>
         </Helmet>

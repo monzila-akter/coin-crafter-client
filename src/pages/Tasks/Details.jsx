@@ -62,7 +62,8 @@ const Details = () => {
   if (error) return <div>Error loading task details!</div>;
 
   return (
-    <div className="w-full mt-32 mb-14 px-5 md:px-10 lg:px-14">
+    <div className="mt-32 container mx-auto px-5 md:px-10 lg:px-14">
+        <div className="w-full mb-14 px-5 md:px-10 lg:px-14">
         <Helmet>
             <title>CoinCrafter | Dashboard | TaskDetails</title>
         </Helmet>
@@ -99,6 +100,7 @@ const Details = () => {
           Submit
         </button>
       </form>
+    </div>
     </div>
     </div>
   );
