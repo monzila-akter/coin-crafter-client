@@ -24,6 +24,7 @@ import ManageTasks from '../layouts/Dashboard/ManageTasks/ManageTasks';
 import ErrorPage from '../pages/ErrorPage/ErrorPage';
 import Services from '../pages/Services/Services';
 import Tasks from '../pages/Tasks/Tasks';
+import Details from '../pages/Tasks/Details';
 import Payments from '../pages/Payments/Payments';
 
 const router = createBrowserRouter([
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
         {
           path: "/tasks",
           element: <PrivateRoute><Tasks></Tasks></PrivateRoute>
+        },
+        {
+          path: "/details/:id",
+          element: <Details></Details>
         },
         {
           path: "/payments",
