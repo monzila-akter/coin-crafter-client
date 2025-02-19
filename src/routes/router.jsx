@@ -26,6 +26,7 @@ import Services from '../pages/Services/Services';
 import Tasks from '../pages/Tasks/Tasks';
 import Details from '../pages/Tasks/Details';
 import Payments from '../pages/Payments/Payments';
+import AdminProfile from '../layouts/Dashboard/AdminProfile/AdminProfile';
 
 const router = createBrowserRouter([
     {
@@ -79,6 +80,10 @@ const router = createBrowserRouter([
              path: "adminHome",
              element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
             },
+           {
+            path: "adminProfile",
+            element: <AdminRoute><AdminProfile></AdminProfile></AdminRoute>
+           },
             {
               path: "manageTasks",
               element: <AdminRoute><ManageTasks></ManageTasks></AdminRoute>
