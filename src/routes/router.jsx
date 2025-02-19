@@ -28,6 +28,7 @@ import Details from '../pages/Tasks/Details';
 import Payments from '../pages/Payments/Payments';
 import AdminProfile from '../layouts/Dashboard/AdminProfile/AdminProfile';
 import BuyerProfile from '../layouts/Dashboard/BuyerProfile/BuyerProfile';
+import WorkerProfile from '../layouts/Dashboard/WorkerProfile/WorkerProfile';
 
 const router = createBrowserRouter([
     {
@@ -126,7 +127,10 @@ const router = createBrowserRouter([
               element: <WorkerHome></WorkerHome>
             },
             
-
+              {
+                path: "workerProfile",
+                element: <WorkerProfile></WorkerProfile>
+              },
             {
               path: "taskList",
               element: <TaskList></TaskList>
