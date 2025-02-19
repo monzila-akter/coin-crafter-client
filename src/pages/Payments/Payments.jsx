@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { useContext } from 'react';
 import { AuthContext } from '../../provider/AuthProvider';
+import { div } from 'framer-motion/client';
 
 
 const Payments = () => {
@@ -21,12 +22,13 @@ const Payments = () => {
   if (error) return <p>Error fetching payment history</p>;
 
   return (
-    <div className="px-5 md:px-10 lg:px-14 container mx-auto mt-32 bg-white shadow-lg rounded-lg">
-      <h2 className="text-xl font-semibold mb-4">Payment History</h2>
-      <div className="overflow-x-auto">
-        <table className="w-full table-auto border-collapse border border-gray-300">
-          <thead>
-            <tr className="bg-gray-200">
+    <div className='container mx-auto px-5 md:px-10 lg:px-14'>
+        <div className="px-5 md:px-10 lg:px-14  mt-36 bg-cyan-50 py-10 shadow-lg rounded-lg">
+      <h2 className="text-3xl font-bold text-cyan-700 mb-8">Payment History</h2>
+      <div className="overflow-x-auto rounded-t-3xl">
+        <table className="w-full table-auto border-collapse border border-cyan-700 ">
+          <thead className='text-white'>
+            <tr className="bg-cyan-700">
               <th className="border p-2">Amount ($)</th>
               <th className="border p-2">Coins</th>
               <th className="border p-2">Transaction ID</th>
@@ -51,6 +53,7 @@ const Payments = () => {
           </tbody>
         </table>
       </div>
+    </div>
     </div>
   );
 };

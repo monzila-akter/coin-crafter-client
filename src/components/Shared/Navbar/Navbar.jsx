@@ -102,26 +102,52 @@ const Navbar = () => {
           </div>
         ) : (
           <div className="hidden lg:flex items-center space-x-6 justify-center flex-grow">
-            <NavLink to="/">
+            <NavLink to="/"     className={({ isActive }) => 
+              isActive
+                ? "font-medium underline text-white" // Active state styles
+                : "text-white" // Default state styles
+            }>
               Home
             </NavLink>
-            <NavLink
+            <Link
               onClick={() => navigate(getDashboardHomeRoute())}
-              className=" text-white hover:text-white"
+              className={({ isActive }) => 
+                isActive
+                  ? "font-medium underline text-white" // Active state styles
+                  : "text-white" // Default state styles
+              }
             >
               Dashboard
-            </NavLink>
-            <NavLink to="/services">
+            </Link>
+            <NavLink to="/services"
+                className={({ isActive }) => 
+                  isActive
+                    ? "font-medium underline text-white" // Active state styles
+                    : "text-white" // Default state styles
+                }
+            >
               Services
             </NavLink>
             {/* Available Coins */}
             {user ? (
               <>
               
-              <NavLink to="/tasks">
+              <NavLink to="/tasks"
+                  className={({ isActive }) => 
+                    isActive
+                      ? "font-medium underline text-white" // Active state styles
+                      : "text-white" // Default state styles
+                  }
+              >
                 Tasks
               </NavLink>
-              <NavLink to="/payments">
+              <NavLink to="/payments"
+                  className={({ isActive }) => 
+                    isActive
+                      ? "font-medium underline text-white" // Active state styles
+                      : "text-white" // Default state styles
+                  }
+              >
                 Payments
               </NavLink>
               <div className="text-lg font-medium btn bg-white border-none flex items-center">
@@ -334,24 +360,48 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <NavLink to="/" className="block text-white hover:text-white">
+            <NavLink to="/"     className={({ isActive }) => 
+              isActive
+                ? "font-medium underline text-white block" // Active state styles
+                : "text-white block" // Default state styles
+            }>
               Home
             </NavLink>
-            <NavLink
+            <Link
               onClick={() => navigate(getDashboardHomeRoute())}
-              className="block  text-white hover:text-white"
+              className={({ isActive }) => 
+                isActive
+                  ? "font-medium underline text-white block" // Active state styles
+                  : "text-white block" // Default state styles
+              }
             >
               Dashboard
-            </NavLink>
-            <NavLink to="/services" className="block text-white hover:text-white">
+            </Link>
+            <NavLink to="/services"     className={({ isActive }) => 
+              isActive
+                ? "font-medium underline text-white block" // Active state styles
+                : "text-white block" // Default state styles
+            }>
               Services
             </NavLink>
             {user ? (
               <>
-              <NavLink to="/tasks" className="block text-white hover:text-white">
+              <NavLink to="/tasks" 
+                  className={({ isActive }) => 
+                    isActive
+                      ? "font-medium underline text-white block" // Active state styles
+                      : "text-white block" // Default state styles
+                  }
+              >
               Tasks
             </NavLink>
-            <NavLink to="/payments" className="block text-white hover:text-white">
+            <NavLink to="/payments"
+                className={({ isActive }) => 
+                  isActive
+                    ? "font-medium underline text-white block" // Active state styles
+                    : "text-white block" // Default state styles
+                }
+            >
              Payments
             </NavLink>
               <div className="block text-lg flex space-x-2 items-center bg-white py-2 px-3 w-[120px] rounded-lg text-black font-medium">
