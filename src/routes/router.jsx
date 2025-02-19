@@ -27,6 +27,7 @@ import Tasks from '../pages/Tasks/Tasks';
 import Details from '../pages/Tasks/Details';
 import Payments from '../pages/Payments/Payments';
 import AdminProfile from '../layouts/Dashboard/AdminProfile/AdminProfile';
+import BuyerProfile from '../layouts/Dashboard/BuyerProfile/BuyerProfile';
 
 const router = createBrowserRouter([
     {
@@ -93,6 +94,10 @@ const router = createBrowserRouter([
              {
                path: "buyerHome",
                element: <BuyerHome></BuyerHome>
+             },
+             {
+              path: "buyerProfile",
+              element: <BuyerProfile></BuyerProfile>
              },
             {
               path: "purchaseCoin",
