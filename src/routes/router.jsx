@@ -29,6 +29,9 @@ import Payments from '../pages/Payments/Payments';
 import AdminProfile from '../layouts/Dashboard/AdminProfile/AdminProfile';
 import BuyerProfile from '../layouts/Dashboard/BuyerProfile/BuyerProfile';
 import WorkerProfile from '../layouts/Dashboard/WorkerProfile/WorkerProfile';
+import WorkerOverview from '../layouts/Dashboard/WorkerOverview/WorkerOverview';
+import AdminOverview from '../layouts/Dashboard/AdminOverview/AdminOverview';
+import BuyerOverview from '../layouts/Dashboard/BuyerOverview/BuyerOverview';
 
 const router = createBrowserRouter([
     {
@@ -82,6 +85,10 @@ const router = createBrowserRouter([
              path: "adminHome",
              element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
             },
+            {
+              path: "adminOverview",
+              element: <AdminOverview></AdminOverview>
+            },
            {
             path: "adminProfile",
             element: <AdminRoute><AdminProfile></AdminProfile></AdminRoute>
@@ -95,6 +102,10 @@ const router = createBrowserRouter([
              {
                path: "buyerHome",
                element: <BuyerHome></BuyerHome>
+             },
+             {
+              path: "buyerOverview",
+              element: <BuyerOverview></BuyerOverview>
              },
              {
               path: "buyerProfile",
@@ -126,7 +137,10 @@ const router = createBrowserRouter([
               path: "workerHome",
               element: <WorkerHome></WorkerHome>
             },
-            
+            {
+              path: "workerOverview",
+              element: <WorkerOverview></WorkerOverview>
+            },
               {
                 path: "workerProfile",
                 element: <WorkerProfile></WorkerProfile>

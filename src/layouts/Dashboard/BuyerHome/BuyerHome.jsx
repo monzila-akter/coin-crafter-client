@@ -55,7 +55,7 @@ const BuyerHome = () => {
     // Reject submission
     const handleReject = async (submission) => {
         try {
-   
+           
             const response = await axiosSecure.post("/reject-submission", {
                 submissionId: submission._id,
                 taskId: submission.task_id,

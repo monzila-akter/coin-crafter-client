@@ -15,6 +15,7 @@ import {
   FaTasks,
   FaUsers,
   FaUser,
+  FaChartBar,
 } from 'react-icons/fa';
 import { FaFolderPlus, FaListCheck } from 'react-icons/fa6';
 import useUserRole from '../../Hooks/useUserRole';
@@ -70,6 +71,12 @@ const Dashboard = () => {
                 </NavLink>
                 <NavLink
                   className="text-xl font-semibold text-cyan-800 mb-6 flex items-center gap-3"
+                  to="/dashboard/workerOverview"
+                >
+                  <FaChartBar className="text-2xl" /> Overview
+                </NavLink>
+                <NavLink
+                  className="text-xl font-semibold text-cyan-800 mb-6 flex items-center gap-3"
                   to="/dashboard/workerProfile"
                 >
                   <FaUser className="text-2xl" /> My Profile
@@ -103,6 +110,12 @@ const Dashboard = () => {
                   to="/dashboard/buyerHome"
                 >
                   <FaHome className="text-2xl" /> Buyer Home
+                </NavLink>
+                <NavLink
+                  className="text-xl font-semibold text-cyan-800 mb-6 flex items-center gap-3"
+                  to="/dashboard/buyerOverview"
+                >
+                  <FaChartBar className="text-2xl" /> Overview
                 </NavLink>
                 <NavLink
                   className="text-xl font-semibold text-cyan-800 mb-6 flex items-center gap-3"
@@ -145,6 +158,12 @@ const Dashboard = () => {
                   to="/dashboard/adminHome"
                 >
                   <FaHome className="text-2xl" /> Admin Home
+                </NavLink>
+                <NavLink
+                  className="text-xl font-semibold text-cyan-800 mb-6 flex items-center gap-3"
+                  to="/dashboard/adminOverview"
+                >
+                  <FaChartBar className="text-2xl" /> Overview
                 </NavLink>
                 <NavLink
                   className="text-xl font-semibold text-cyan-800 mb-6 flex items-center gap-3"
